@@ -2,6 +2,8 @@
 
 **Languages:** [العربية](#-العربية) · [Français](#-français) · [English](#-english)
 
+> 🤝 **Toute proposition de modification est bienvenue.**
+
 ---
 
 ## 🇩🇿 العربية
@@ -22,11 +24,11 @@
 - **المنصة:** Android SDK 35، `minSdk 26`، Java 17.
 - **Build:**
   ```sh
-  JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64 /home/ammi/.local/opt/gradle/bin/gradle :app:assembleDebug
+  JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64 ~/.local/opt/gradle/bin/gradle :app:assembleDebug
   ```
 - **Tests:**
   ```sh
-  JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64 /home/ammi/.local/opt/gradle/bin/gradle :app:testDebugUnitTest
+  JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64 ~/.local/opt/gradle/bin/gradle :app:testDebugUnitTest
   ```
 - **قاعدة البيانات:** SQLite مع عمود غير متدمّر `sunrise_epoch`.
 
@@ -65,11 +67,11 @@ La langue par défaut est **l'arabe (RTL)**, avec des variantes **français** et
 - **Plateforme :** Android SDK 35, `minSdk 26`, Java 17.
 - **Build :**
   ```sh
-  JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64 /home/ammi/.local/opt/gradle/bin/gradle :app:assembleDebug
+  JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64 ~/.local/opt/gradle/bin/gradle :app:assembleDebug
   ```
 - **Tests :**
   ```sh
-  JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64 /home/ammi/.local/opt/gradle/bin/gradle :app:testDebugUnitTest
+  JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64 ~/.local/opt/gradle/bin/gradle :app:testDebugUnitTest
   ```
 - **Base de données :** SQLite avec colonne non destructive `sunrise_epoch`.
 
@@ -108,11 +110,11 @@ The default language is **Arabic (RTL)** with full **French** and **English** va
 - **Platform:** Android SDK 35, `minSdk 26`, Java 17.
 - **Build:**
   ```sh
-  JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64 /home/ammi/.local/opt/gradle/bin/gradle :app:assembleDebug
+  JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64 ~/.local/opt/gradle/bin/gradle :app:assembleDebug
   ```
 - **Tests:**
   ```sh
-  JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64 /home/ammi/.local/opt/gradle/bin/gradle :app:testDebugUnitTest
+  JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64 ~/.local/opt/gradle/bin/gradle :app:testDebugUnitTest
   ```
 - **Database:** SQLite with a non-destructive `sunrise_epoch` column.
 
