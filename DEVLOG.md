@@ -1,5 +1,12 @@
 # DEVLOG.md — Journal technique
 
+## 2026-10-26 22:59 — Documentation multilingue
+- **Travail :** création de `README.md` en arabe, français et anglais avec vue d'ensemble, état réel, commandes de build/test, règle métier et limites connues.
+- **Fichiers :** `README.md`, `TASKS.md`, `PROJECT_STATE.md`.
+- **Vérification :** `assembleDebug` et `testDebugUnitTest` déjà validés.
+- **Limite :** rendu Markdown/anchors non testé visuellement sur GitHub.
+- **Suite :** validation UI sur appareil/émulateur.
+
 ## 2026-10-26 22:52 — Simplification métier et Shurūq
 - **Travail :** suppression des temps optionnels/nécessaires du modèle, du moteur, de l'UI, des réglages et des chaînes ; ajout de Shurūq (Fajr→Shurūq, chaque prière jusqu'à la suivante, Isha→Fajr du lendemain) ; mise à jour accueil, calendrier, horloge et couleurs.
 - **Fichiers :** `core/PrayerDay.java`, `core/TimeEngine.java`, `core/ScheduleValidator.java`, `data/AlAdhanParser.java`, `data/PrayerDatabase.java`, `data/PrayerMerge.java`, `settings/ColorSlot.java`, `ui/MainActivity.java`, `ui/CalendarActivity.java`, `ui/PrayerClockView.java`, `ui/SettingsActivity.java`, `res/values*/strings.xml`.

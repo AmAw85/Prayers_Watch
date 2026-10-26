@@ -36,7 +36,6 @@ Application Android « Horloge des prières » : horloge analogique 12 h, anneau
 ## Non commencé
 - Tests d'instrumentation ou smoke test sur appareil/émulateur.
 - Wrapper Gradle.
-- `README.md` (build, tests, limites de la source, fonctionnalités partielles).
 - Recherche d'une éventuelle API officielle algérienne réellement documentée.
 
 ## Dernière tâche réalisée

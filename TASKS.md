@@ -42,6 +42,12 @@ Légende : une tâche n'est `DONE` qu'après vérification de son critère d'acc
 - **Critère :** code, UI, réglages et localisation cohérents ; tests JVM sur les intervalles, Shurūq, valeurs manquantes et passage de minuit ; build Android OK.
 - **Vérification :** `gradle :app:testDebugUnitTest` réussit, 7 tests passés, 0 échec ; `gradle :app:assembleDebug` réussit (2026-10-26 22:52 CET). Migration de base version 2 non destructive (`sunrise_epoch`).
 
+### DOC-02 — Rédiger le README multilingue
+- **Objectif :** documenter build/test, architecture, source AlAdhan calculée, absence d'API officielle documentée, limites et fonctionnalités partielles en arabe, français et anglais.
+- **Dépendances :** aucune.
+- **Critère :** aucune affirmation non vérifiée ; commandes réellement exécutables.
+- **Vérification :** `README.md` multilingue créé et `gradle :app:assembleDebug` / `testDebugUnitTest` déjà validés.
+
 ## IN_PROGRESS
 
 Aucune tâche en cours. La prochaine unité de développement est `TEST-02`.
@@ -83,12 +89,6 @@ Aucune tâche en cours. La prochaine unité de développement est `TEST-02`.
 - **Dépendances :** aucune.
 - **Critère :** `./gradlew assembleDebug` réussit sans variable Gradle système.
 - **Vérification :** `gradle wrapper --gradle-version 8.11.1`, puis `./gradlew assembleDebug`.
-
-### DOC-02 — Rédiger le README
-- **Objectif :** commandes de build/test, architecture, source AlAdhan calculée, absence d'API officielle documentée, limites et fonctionnalités partielles.
-- **Dépendances :** `TEST-06`, `BUILD-01`.
-- **Critère :** aucune affirmation non vérifiée ; commandes réellement exécutables.
-- **Vérification :** relecture et exécution au moins du build documenté.
 
 ### FEAT-01 — Import de créneaux (supprimé)
 - **Objectif :** aucun import de créneaux optionnels/nécessaires n'est prévu.
