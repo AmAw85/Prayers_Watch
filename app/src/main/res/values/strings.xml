@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">الساعة الإسلامية</string>
+    <string name="app_tagline">مواقيت الصلاة والوقت الحالي</string>
+    <string name="settings">الإعدادات</string>
+    <string name="settings_title">الإعدادات</string>
+    <string name="calendar">التقويم</string>
+    <string name="calendar_title">التقويم</string>
+    <string name="back">رجوع</string>
+    <string name="close">إغلاق</string>
+    <string name="today">اليوم</string>
+    <string name="cancel">إلغاء</string>
+    <string name="save">حفظ</string>
+    <string name="apply">تطبيق</string>
+    <string name="edit">تعديل</string>
+    <string name="none">لا شيء</string>
+    <string name="unknown">غير معروف</string>
+
+    <string name="am">صباحًا</string>
+    <string name="pm">مساءً</string>
+    <string name="fajr">الفجر</string>
+    <string name="dhuhr">الظهر</string>
+    <string name="asr">العصر</string>
+    <string name="maghrib">المغرب</string>
+    <string name="isha">العشاء</string>
+    <string name="prayer_optional">وقت اختياري</string>
+    <string name="prayer_necessary">وقت ضروري</string>
+
+    <string name="next_prayer">الصلاة القادمة</string>
+    <string name="next_prayer_at">في %1$s</string>
+    <string name="remaining">المتبقي</string>
+    <string name="current_prayer">الصلاة الحالية</string>
+    <string name="no_next_prayer">لا تتوفر صلاة قادمة</string>
+    <string name="no_current_prayer">لا يتوفر وقت حالي</string>
+    <string name="now_active">الآن: %1$s</string>
+    <string name="no_active_interval">لا يوجد وقت ديني صريح مطابق الآن.</string>
+    <string name="intervals_not_configured">الأوقات الاختيارية والضرورية غير مهيأة.</string>
+
+    <string name="no_data_title">لا توجد بيانات محلية لهذا اليوم</string>
+    <string name="no_data_body">شغّل المزامنة أو تحقق من اتصالك. لن يعرض التطبيق مواقيت غير موثوقة.</string>
+    <string name="prayer_times">مواقيت الصلاة</string>
+    <string name="rings_title">حلقات الوقت</string>
+    <string name="ring_prayer_title">١. تمييز الصلوات</string>
+    <string name="ring_optional_title">٢. الوقت الاختياري</string>
+    <string name="ring_necessary_title">٣. الوقت الضروري</string>
+    <string name="ring_prayer_desc">قطاعات لتحديد بداية الصلوات الخمس. ليست فتوى بصلاحية الوقت.</string>
+    <string name="ring_optional_desc">لا تُعرض إلا عند استيراد فترات صريحة وموثقة.</string>
+    <string name="ring_necessary_desc">لا تُعرض إلا عند استيراد فترات صريحة وموثقة.</string>
+    <string name="ring_not_configured">غير مهيأ — لا تُستنتج أوقات دينية تلقائيًا</string>
+    <string name="am_pm_lanes">لكل حلقة مساران: صباحًا (متقطع) ومساءً (متصل).</string>
+    <string name="legend_note">لا تعتمد المعلومات على اللون وحده: لكل حلقة رقم واسم ونمط.</string>
+    <string name="clock_content_description">ساعة تناظرية ذات 12 ساعة مع حلقات للصلوات والأوقات الدينية</string>
+
+    <string name="source">المصدر</string>
+    <string name="source_status">المصدر: %1$s · %2$s</string>
+    <string name="source_attribution">بيانات المصدر: %1$s</string>
+    <string name="source_kind_official">رسمي</string>
+    <string name="source_kind_calculated">محسوب</string>
+    <string name="source_kind_estimated">تقديري</string>
+    <string name="source_kind_manual">يدوي</string>
+    <string name="source_kind_unverified">غير متحقق منه</string>
+    <string name="provider_aladhan">AlAdhan — طريقة الجزائر (محسوبة)</string>
+    <string name="provider_aladhan_short">AlAdhan (محسوب)</string>
+    <string name="provider_none">دون مزامنة تلقائية</string>
+    <string name="manual_source">إدخال محلي</string>
+    <string name="data_note">المواقيت المحسوبة ليست مواقيت رسمية. تحقق من الجهة المحلية.</string>
+
+    <string name="status_current">محدّثة</string>
+    <string name="status_stale">قديمة</string>
+    <string name="status_unavailable">غير متوفرة</string>
+    <string name="status_unverified">غير متحقق منها</string>
+    <string name="status_last_sync">آخر مزامنة ناجحة: %1$s</string>
+    <string name="status_never">لم تتم أي مزامنة ناجحة</string>
+    <string name="status_offline">تعذر الاتصال — تُعرض آخر بيانات محفوظة.</string>
+    <string name="status_city_mismatch">البيانات المحفوظة لا تطابق المدينة أو المنطقة الزمنية الحالية.</string>
+
+    <string name="sync">مزامنة</string>
+    <string name="sync_now">مزامنة الآن</string>
+    <string name="syncing">جارٍ التحديث…</string>
+    <string name="sync_success">تم تحديث %1$d يوم.</string>
+    <string name="sync_error">تعذر التحديث: %1$s</string>
+    <string name="sync_error_kept">حُفظت البيانات المحلية السابقة.</string>
+    <string name="error_network">تعذر الاتصال بالشبكة.</string>
+    <string name="error_http">رفض الخادم الطلب.</string>
+    <string name="error_invalid_data">بيانات المصدر غير صالحة أو غير مكتملة.</string>
+    <string name="error_timezone">المنطقة الزمنية لا تطابق المصدر.</string>
+    <string name="error_storage">تعذر حفظ البيانات محليًا.</string>
+    <string name="error_no_provider">لم يتم اختيار مصدر بيانات.</string>
+    <string name="error_unknown">خطأ غير متوقع.</string>
+
+    <string name="correction_title">تصحيح يدوي</string>
+    <string name="correction_subtitle">تُحفظ القيمة الأصلية والقيمة المصححة معًا، ويبقى التصحيح بعد المزامنة.</string>
+    <string name="corrected_badge">مصحح</string>
+    <string name="original_value">الأصل: %1$s</string>
+    <string name="corrected_value">المصحح: %1$s</string>
+    <string name="date_label">التاريخ</string>
+    <string name="prayer_label">الصلاة</string>
+    <string name="original_time_label">الوقت الأصلي</string>
+    <string name="new_time_label">الوقت المصحح</string>
+    <string name="reason_label">السبب</string>
+    <string name="provenance_label">الجهة أو المصدر</string>
+    <string name="correction_saved">حُفظ التصحيح.</string>
+    <string name="correction_cleared">أُزيل التصحيح.</string>
+    <string name="correction_required">اذكر السبب والجهة.</string>
+    <string name="correction_no_day">لا توجد بيانات محفوظة لهذا اليوم.</string>
+    <string name="clear_correction">إزالة التصحيح</string>
+    <string name="corrections_title">التصحيحات اليدوية</string>
+    <string name="corrections_help">تُطبَّق التصحيحات فوق بيانات المصدر ولا تُحذف عند المزامنة.</string>
+    <string name="no_corrections">لا توجد تصحيحات لهذا اليوم.</string>
+    <string name="correction_time_title">الوقت المصحح</string>
+    <string name="correction_date_title">تاريخ التصحيح</string>
+    <string name="correction_list_item">%1$s: %2$s — %3$s</string>
+    <string name="correction_provenance_item">الجهة: %1$s</string>
+
+    <string name="hijri_label">هجري</string>
+    <string name="gregorian_label">ميلادي</string>
+    <string name="hijri_not_available">التاريخ الهجري غير متوفر</string>
+    <string name="date_tomorrow">غدًا</string>
+
+    <string name="official_source_title">المصدر الرسمي الجزائري</string>
+    <string name="official_source_unavailable">لم نجد واجهة برمجية عمومية موثقة لوزارة الشؤون الدينية والأوقاف. لا تُنسخ بيانات رسمية من مصادر غير موثوقة، ولا يُقدَّم AlAdhan كمصدر رسمي.</string>
+    <string name="provider_label">مصدر مواقيت الصلاة</string>
+    <string name="country_label">البلد</string>
+    <string name="country_algeria">الجزائر</string>
+    <string name="city_label">المدينة</string>
+    <string name="timezone_label">المنطقة الزمنية (IANA)</string>
+    <string name="timezone_invalid">أدخل منطقة IANA صالحة، مثل Africa/Algiers.</string>
+    <string name="last_sync_label">آخر مزامنة ناجحة</string>
+    <string name="validity_label">حالة البيانات</string>
+    <string name="never">أبدًا</string>
+    <string name="last_attempt_label">آخر محاولة</string>
+    <string name="data_sources_title">مصادر البيانات</string>
+    <string name="settings_saved">حُفظ الإعداد.</string>
+    <string name="city_changed">حُفظت المدينة والمنطقة الزمنية. زامن البيانات للتاريخ الجديد.</string>
+    <string name="no_data_for_validation">لا توجد بيانات لهذا اليوم بعد.</string>
+
+    <string name="language_title">اللغة</string>
+    <string name="language_help">العربية من اليمين إلى اليسار، والفرنسية والإنجليزية من اليسار إلى اليمين. يُحفظ الاختيار بعد إعادة التشغيل.</string>
+    <string name="colors_title">ألوان العرض</string>
+    <string name="colors_help">كل لون قابل للتعديل. القيم الافتراضية اختيارات بصرية، وليست اتفاقيات دينية.</string>
+    <string name="reset_colors">استعادة الألوان الافتراضية</string>
+    <string name="reset_colors_confirm">استعادة جميع الألوان الافتراضية؟</string>
+    <string name="reset_done">استُعيدت الألوان الافتراضية.</string>
+    <string name="color_red">الأحمر</string>
+    <string name="color_green">الأخضر</string>
+    <string name="color_blue">الأزرق</string>
+    <string name="color_hex">الرمز اللوني</string>
+    <string name="color_apply">تطبيق اللون</string>
+    <string name="color_invalid">أدخل لونًا بصيغة #RRGGBB.</string>
+    <string name="color_saved">حُفظ اللون.</string>
+    <string name="color_preview">معاينة</string>
+    <string name="color_low_contrast">تحذير: قد يكون هذا اللون منخفض التباين مع الخلفية.</string>
+    <string name="color_edit_for">تعديل لون %1$s</string>
+
+    <string name="manual_section_title">التصحيح اليدوي</string>
+    <string name="import_title">استيراد ملف</string>
+    <string name="import_not_available">الاستيراد الكامل غير مضمّن في هذه النسخة. البنية تحفظ الفترات الصريحة إذا وُجدت، ولا تولّدها تلقائيًا.</string>
+    <string name="about_title">حول البيانات والقيود</string>
+    <string name="about_sources">يعرض التطبيق مواقيت محسوبة من AlAdhan بالطريقة 19. لا توجد واجهة رسمية جزائرية موثقة مدمجة. تُحفظ التصحيحات محليًا. الأوقات الاختيارية والضرورية لا تُستنتج من مواقيت الصلاة.</string>
+    <string name="about_version">الإصدار 1.0 — دون اتصال بعد أول مزامنة</string>
+    <string name="privacy_note">لا يُرسل التطبيق أي بيانات شخصية. تُحفظ المواقيت والإعدادات على الجهاز.</string>
+
+    <string name="calendar_prev">الشهر السابق</string>
+    <string name="calendar_next">الشهر التالي</string>
+    <string name="calendar_no_data">لا توجد بيانات محفوظة لهذا اليوم.</string>
+    <string name="calendar_select_day">اختر يومًا لعرض البيانات المحفوظة.</string>
+    <string name="calendar_legend">الخلايا ذات البيانات تعرض اليوم الهجري أيضًا. لا تعتمد القراءة على اللون وحده.</string>
+    <string name="calendar_source">المصدر</string>
+    <string name="calendar_corrected">مصحح</string>
+    <string name="calendar_intervals_not_configured">الأوقات الاختيارية والضرورية غير مهيأة لهذا اليوم.</string>
+    <string name="calendar_intervals_configured">الأوقات الدينية الصريحة: اختياري %1$d، ضروري %2$d.</string>
+    <string name="calendar_selected_day">تفاصيل اليوم</string>
+    <string name="calendar_today">اليوم</string>
+
+    <string name="settings_content_description">فتح الإعدادات</string>
+    <string name="calendar_content_description">فتح التقويم</string>
+    <string name="refresh_content_description">مزامنة البيانات</string>
+    <string name="edit_time_for">تصحيح وقت %1$s</string>
+    <string name="previous_month_content_description">الشهر السابق</string>
+    <string name="next_month_content_description">الشهر التالي</string>
+
+    <string name="format_source_line">%1$s · %2$s</string>
+    <string name="format_last_sync">%1$s</string>
+    <string name="format_selected_date">%1$s — %2$s</string>
+    <string name="format_sync_time">%1$s</string>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#FF10161C</color>
+    <color name="surface">#FF182128</color>
+    <color name="surface_alt">#FF202B33</color>
+    <color name="text_primary">#FFF2F0EA</color>
+    <color name="text_secondary">#FFA9B4BC</color>
+    <color name="outline">#FF34434D</color>
+    <color name="accent">#FF70B89B</color>
+    <color name="accent_dark">#FF4D9377</color>
+    <color name="on_accent">#FF0B1412</color>
+    <color name="success">#FF70B89B</color>
+    <color name="warning">#FFE0B15C</color>
+    <color name="danger">#FFF08A8A</color>
+    <color name="clock_face">#FF151D24</color>
+    <color name="clock_face_alt">#FF1C262F</color>
+    <color name="ring_track">#FF33424D</color>
+    <color name="ring_track_strong">#FF4A5D6B</color>
+    <color name="status_bg">#FF1C2A26</color>
+    <color name="status_stale_bg">#FF2D271C</color>
+    <color name="status_error_bg">#FF302020</color>
+    <color name="badge_bg">#FF243039</color>
+    <color name="scrim">#99000000</color>
+    <color name="transparent">#00000000</color>
+</resources>

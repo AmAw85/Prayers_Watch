@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Horloge islamique</string>
+    <string name="app_tagline">Horaires des prières et heure actuelle</string>
+    <string name="settings">Paramètres</string>
+    <string name="settings_title">Paramètres</string>
+    <string name="calendar">Calendrier</string>
+    <string name="calendar_title">Calendrier</string>
+    <string name="back">Retour</string>
+    <string name="close">Fermer</string>
+    <string name="today">Aujourd’hui</string>
+    <string name="cancel">Annuler</string>
+    <string name="save">Enregistrer</string>
+    <string name="apply">Appliquer</string>
+    <string name="edit">Modifier</string>
+    <string name="none">Aucun</string>
+    <string name="unknown">Inconnu</string>
+
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
+    <string name="fajr">Fajr</string>
+    <string name="dhuhr">Dohr</string>
+    <string name="asr">Asr</string>
+    <string name="maghrib">Maghrib</string>
+    <string name="isha">Isha</string>
+    <string name="prayer_optional">Temps optionnel</string>
+    <string name="prayer_necessary">Temps nécessaire</string>
+
+    <string name="next_prayer">Prochaine prière</string>
+    <string name="next_prayer_at">à %1$s</string>
+    <string name="remaining">Restant</string>
+    <string name="current_prayer">Prière actuelle</string>
+    <string name="no_next_prayer">Aucune prière à venir</string>
+    <string name="no_current_prayer">Aucun horaire actuel disponible</string>
+    <string name="now_active">Maintenant : %1$s</string>
+    <string name="no_active_interval">Aucun intervalle religieux explicite actif.</string>
+    <string name="intervals_not_configured">Les temps optionnels et nécessaires ne sont pas configurés.</string>
+
+    <string name="no_data_title">Aucune donnée locale pour ce jour</string>
+    <string name="no_data_body">Lancez une synchronisation ou vérifiez la connexion. Aucun horaire non fiable n’est affiché.</string>
+    <string name="prayer_times">Horaires des prières</string>
+    <string name="rings_title">Anneaux temporels</string>
+    <string name="ring_prayer_title">1. Repères des cinq prières</string>
+    <string name="ring_optional_title">2. Temps optionnel</string>
+    <string name="ring_necessary_title">3. Temps nécessaire</string>
+    <string name="ring_prayer_desc">Secteurs indiquant le début des cinq prières. Ce n’est pas un avis sur la validité religieuse.</string>
+    <string name="ring_optional_desc">Affiché uniquement après import d’intervalles explicites et documentés.</string>
+    <string name="ring_necessary_desc">Affiché uniquement après import d’intervalles explicites et documentés.</string>
+    <string name="ring_not_configured">Non configuré — aucun temps religieux n’est déduit automatiquement</string>
+    <string name="am_pm_lanes">Chaque anneau possède deux voies : AM en pointillés, PM en trait plein.</string>
+    <string name="legend_note">L’information ne dépend pas de la couleur : chaque anneau a un numéro, un nom et un motif.</string>
+    <string name="clock_content_description">Horloge analogique de 12 heures avec anneaux des prières et intervalles religieux</string>
+
+    <string name="source">Source</string>
+    <string name="source_status">Source : %1$s · %2$s</string>
+    <string name="source_attribution">Données source : %1$s</string>
+    <string name="source_kind_official">officielle</string>
+    <string name="source_kind_calculated">calculée</string>
+    <string name="source_kind_estimated">estimée</string>
+    <string name="source_kind_manual">manuelle</string>
+    <string name="source_kind_unverified">non vérifiée</string>
+    <string name="provider_aladhan">AlAdhan — méthode Algérie (calculée)</string>
+    <string name="provider_aladhan_short">AlAdhan (calculé)</string>
+    <string name="provider_none">Sans synchronisation automatique</string>
+    <string name="manual_source">Saisie locale</string>
+    <string name="data_note">Les horaires calculés ne sont pas officiels. Vérifiez auprès de l’autorité locale.</string>
+
+    <string name="status_current">à jour</string>
+    <string name="status_stale">anciennes</string>
+    <string name="status_unavailable">indisponibles</string>
+    <string name="status_unverified">non vérifiées</string>
+    <string name="status_last_sync">Dernière synchronisation réussie : %1$s</string>
+    <string name="status_never">Aucune synchronisation réussie</string>
+    <string name="status_offline">Connexion impossible — les dernières données locales restent affichées.</string>
+    <string name="status_city_mismatch">Les données enregistrées ne correspondent pas à la ville ou au fuseau actuel.</string>
+
+    <string name="sync">Synchroniser</string>
+    <string name="sync_now">Synchroniser maintenant</string>
+    <string name="syncing">Mise à jour…</string>
+    <string name="sync_success">%1$d jour(s) mis à jour.</string>
+    <string name="sync_error">Échec de la mise à jour : %1$s</string>
+    <string name="sync_error_kept">Les données locales précédentes sont conservées.</string>
+    <string name="error_network">Connexion réseau impossible.</string>
+    <string name="error_http">Le serveur a refusé la requête.</string>
+    <string name="error_invalid_data">Données du fournisseur invalides ou incomplètes.</string>
+    <string name="error_timezone">Le fuseau configuré ne correspond pas à celui du fournisseur.</string>
+    <string name="error_storage">Impossible d’enregistrer les données localement.</string>
+    <string name="error_no_provider">Aucun fournisseur de données sélectionné.</string>
+    <string name="error_unknown">Erreur inattendue.</string>
+
+    <string name="correction_title">Correction manuelle</string>
+    <string name="correction_subtitle">La valeur d’origine et la valeur corrigée sont conservées ensemble. La correction survit à la resynchronisation.</string>
+    <string name="corrected_badge">corrigé</string>
+    <string name="original_value">Origine : %1$s</string>
+    <string name="corrected_value">Corrigé : %1$s</string>
+    <string name="date_label">Date</string>
+    <string name="prayer_label">Prière</string>
+    <string name="original_time_label">Heure d’origine</string>
+    <string name="new_time_label">Heure corrigée</string>
+    <string name="reason_label">Motif</string>
+    <string name="provenance_label">Source ou autorité</string>
+    <string name="correction_saved">Correction enregistrée.</string>
+    <string name="correction_cleared">Correction supprimée.</string>
+    <string name="correction_required">Renseignez le motif et la source.</string>
+    <string name="correction_no_day">Aucune donnée enregistrée pour ce jour.</string>
+    <string name="clear_correction">Supprimer la correction</string>
+    <string name="corrections_title">Corrections manuelles</string>
+    <string name="corrections_help">Les corrections s’appliquent par-dessus les données source et ne sont pas supprimées lors d’une synchronisation.</string>
+    <string name="no_corrections">Aucune correction pour ce jour.</string>
+    <string name="correction_time_title">Heure corrigée</string>
+    <string name="correction_date_title">Date de la correction</string>
+    <string name="correction_list_item">%1$s : %2$s — %3$s</string>
+    <string name="correction_provenance_item">Source : %1$s</string>
+
+    <string name="hijri_label">Hégire</string>
+    <string name="gregorian_label">Grégorien</string>
+    <string name="hijri_not_available">Date hégirienne non disponible</string>
+    <string name="date_tomorrow">demain</string>
+
+    <string name="official_source_title">Source officielle algérienne</string>
+    <string name="official_source_unavailable">Aucune API publique documentée du ministère des Affaires religieuses et des Wakfs n’a été trouvée. Aucune donnée officielle n’est copiée depuis une source non fiable, et AlAdhan n’est jamais présenté comme officiel.</string>
+    <string name="provider_label">Fournisseur des horaires</string>
+    <string name="country_label">Pays</string>
+    <string name="country_algeria">Algérie</string>
+    <string name="city_label">Ville</string>
+    <string name="timezone_label">Fuseau horaire (IANA)</string>
+    <string name="timezone_invalid">Saisissez un fuseau IANA valide, par exemple Africa/Algiers.</string>
+    <string name="last_sync_label">Dernière synchronisation réussie</string>
+    <string name="validity_label">État des données</string>
+    <string name="never">Jamais</string>
+    <string name="last_attempt_label">Dernière tentative</string>
+    <string name="data_sources_title">Sources de données</string>
+    <string name="settings_saved">Paramètre enregistré.</string>
+    <string name="city_changed">Ville et fuseau enregistrés. Synchronisez pour les nouvelles dates.</string>
+    <string name="no_data_for_validation">Aucune donnée pour ce jour pour le moment.</string>
+
+    <string name="language_title">Langue</string>
+    <string name="language_help">Arabe de droite à gauche, français et anglais de gauche à droite. Le choix est conservé après redémarrage.</string>
+    <string name="colors_title">Couleurs d’affichage</string>
+    <string name="colors_help">Chaque couleur est modifiable. Les valeurs par défaut sont des choix visuels, pas des conventions religieuses.</string>
+    <string name="reset_colors">Rétablir les couleurs par défaut</string>
+    <string name="reset_colors_confirm">Rétablir toutes les couleurs par défaut ?</string>
+    <string name="reset_done">Couleurs par défaut rétablies.</string>
+    <string name="color_red">Rouge</string>
+    <string name="color_green">Vert</string>
+    <string name="color_blue">Bleu</string>
+    <string name="color_hex">Code couleur</string>
+    <string name="color_apply">Appliquer la couleur</string>
+    <string name="color_invalid">Saisissez une couleur au format #RRGGBB.</string>
+    <string name="color_saved">Couleur enregistrée.</string>
+    <string name="color_preview">Aperçu</string>
+    <string name="color_low_contrast">Attention : ce choix peut être peu contrasté avec le fond.</string>
+    <string name="color_edit_for">Modifier la couleur %1$s</string>
+
+    <string name="manual_section_title">Correction manuelle</string>
+    <string name="import_title">Importer un fichier</string>
+    <string name="import_not_available">L’import complet n’est pas inclus dans cette version. Le modèle conserve les intervalles explicites s’ils existent et ne les génère jamais automatiquement.</string>
+    <string name="about_title">À propos des données et limites</string>
+    <string name="about_sources">L’application affiche des horaires calculés par AlAdhan avec la méthode 19. Aucune API officielle algérienne documentée n’est intégrée. Les corrections restent locales. Les temps optionnels et nécessaires ne sont jamais déduits des horaires de prière.</string>
+    <string name="about_version">Version 1.0 — fonctionne hors ligne après la première synchronisation</string>
+    <string name="privacy_note">Aucune donnée personnelle n’est envoyée. Horaires et réglages restent sur l’appareil.</string>
+
+    <string name="calendar_prev">Mois précédent</string>
+    <string name="calendar_next">Mois suivant</string>
+    <string name="calendar_no_data">Aucune donnée enregistrée pour ce jour.</string>
+    <string name="calendar_select_day">Sélectionnez un jour pour afficher les données enregistrées.</string>
+    <string name="calendar_legend">Les cellules renseignées affichent aussi le jour hégirien. La lecture ne dépend pas uniquement de la couleur.</string>
+    <string name="calendar_source">Source</string>
+    <string name="calendar_corrected">corrigé</string>
+    <string name="calendar_intervals_not_configured">Temps optionnels et nécessaires non configurés pour ce jour.</string>
+    <string name="calendar_intervals_configured">Intervalles religieux explicites : optionnel %1$d, nécessaire %2$d.</string>
+    <string name="calendar_selected_day">Détails du jour</string>
+    <string name="calendar_today">Aujourd’hui</string>
+
+    <string name="settings_content_description">Ouvrir les paramètres</string>
+    <string name="calendar_content_description">Ouvrir le calendrier</string>
+    <string name="refresh_content_description">Synchroniser les données</string>
+    <string name="edit_time_for">Corriger l’heure de %1$s</string>
+    <string name="previous_month_content_description">Mois précédent</string>
+    <string name="next_month_content_description">Mois suivant</string>
+
+    <string name="format_source_line">%1$s · %2$s</string>
+    <string name="format_last_sync">%1$s</string>
+    <string name="format_selected_date">%1$s — %2$s</string>
+    <string name="format_sync_time">%1$s</string>
+</resources>

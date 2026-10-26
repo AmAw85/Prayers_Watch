@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Islamic Prayer Clock</string>
+    <string name="app_tagline">Prayer times and current time</string>
+    <string name="settings">Settings</string>
+    <string name="settings_title">Settings</string>
+    <string name="calendar">Calendar</string>
+    <string name="calendar_title">Calendar</string>
+    <string name="back">Back</string>
+    <string name="close">Close</string>
+    <string name="today">Today</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="apply">Apply</string>
+    <string name="edit">Edit</string>
+    <string name="none">None</string>
+    <string name="unknown">Unknown</string>
+
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
+    <string name="fajr">Fajr</string>
+    <string name="dhuhr">Dhuhr</string>
+    <string name="asr">Asr</string>
+    <string name="maghrib">Maghrib</string>
+    <string name="isha">Isha</string>
+    <string name="prayer_optional">Optional interval</string>
+    <string name="prayer_necessary">Necessary interval</string>
+
+    <string name="next_prayer">Next prayer</string>
+    <string name="next_prayer_at">at %1$s</string>
+    <string name="remaining">Remaining</string>
+    <string name="current_prayer">Current prayer</string>
+    <string name="no_next_prayer">No upcoming prayer</string>
+    <string name="no_current_prayer">No current schedule available</string>
+    <string name="now_active">Now: %1$s</string>
+    <string name="no_active_interval">No explicit religious interval is active now.</string>
+    <string name="intervals_not_configured">Optional and necessary intervals are not configured.</string>
+
+    <string name="no_data_title">No local data for this day</string>
+    <string name="no_data_body">Run a sync or check your connection. No unverified times are shown.</string>
+    <string name="prayer_times">Prayer times</string>
+    <string name="rings_title">Time rings</string>
+    <string name="ring_prayer_title">1. Prayer recognition</string>
+    <string name="ring_optional_title">2. Optional time</string>
+    <string name="ring_necessary_title">3. Necessary time</string>
+    <string name="ring_prayer_desc">Sectors marking the start of the five prayers. This is not a ruling on religious validity.</string>
+    <string name="ring_optional_desc">Shown only after importing explicit, documented intervals.</string>
+    <string name="ring_necessary_desc">Shown only after importing explicit, documented intervals.</string>
+    <string name="ring_not_configured">Not configured — religious intervals are never derived automatically</string>
+    <string name="am_pm_lanes">Each ring has two lanes: AM dashed, PM solid.</string>
+    <string name="legend_note">Information never relies on colour alone: every ring has a number, a name and a pattern.</string>
+    <string name="clock_content_description">12-hour analog clock with prayer and religious interval rings</string>
+
+    <string name="source">Source</string>
+    <string name="source_status">Source: %1$s · %2$s</string>
+    <string name="source_attribution">Source data: %1$s</string>
+    <string name="source_kind_official">official</string>
+    <string name="source_kind_calculated">calculated</string>
+    <string name="source_kind_estimated">estimated</string>
+    <string name="source_kind_manual">manual</string>
+    <string name="source_kind_unverified">unverified</string>
+    <string name="provider_aladhan">AlAdhan — Algeria method (calculated)</string>
+    <string name="provider_aladhan_short">AlAdhan (calculated)</string>
+    <string name="provider_none">No automatic sync</string>
+    <string name="manual_source">Local entry</string>
+    <string name="data_note">Calculated times are not official. Verify with your local authority.</string>
+
+    <string name="status_current">up to date</string>
+    <string name="status_stale">stale</string>
+    <string name="status_unavailable">unavailable</string>
+    <string name="status_unverified">unverified</string>
+    <string name="status_last_sync">Last successful sync: %1$s</string>
+    <string name="status_never">No successful sync yet</string>
+    <string name="status_offline">Network unavailable — the latest local data remains visible.</string>
+    <string name="status_city_mismatch">Stored data does not match the current city or timezone.</string>
+
+    <string name="sync">Sync</string>
+    <string name="sync_now">Sync now</string>
+    <string name="syncing">Updating…</string>
+    <string name="sync_success">%1$d day(s) updated.</string>
+    <string name="sync_error">Update failed: %1$s</string>
+    <string name="sync_error_kept">The previous local data is kept.</string>
+    <string name="error_network">Network connection failed.</string>
+    <string name="error_http">The server rejected the request.</string>
+    <string name="error_invalid_data">Provider data is invalid or incomplete.</string>
+    <string name="error_timezone">The configured timezone does not match the provider.</string>
+    <string name="error_storage">Could not save data locally.</string>
+    <string name="error_no_provider">No data provider selected.</string>
+    <string name="error_unknown">Unexpected error.</string>
+
+    <string name="correction_title">Manual correction</string>
+    <string name="correction_subtitle">The original value and the corrected value are both kept. The correction survives resynchronisation.</string>
+    <string name="corrected_badge">corrected</string>
+    <string name="original_value">Original: %1$s</string>
+    <string name="corrected_value">Corrected: %1$s</string>
+    <string name="date_label">Date</string>
+    <string name="prayer_label">Prayer</string>
+    <string name="original_time_label">Original time</string>
+    <string name="new_time_label">Corrected time</string>
+    <string name="reason_label">Reason</string>
+    <string name="provenance_label">Source or authority</string>
+    <string name="correction_saved">Correction saved.</string>
+    <string name="correction_cleared">Correction removed.</string>
+    <string name="correction_required">Enter a reason and a source.</string>
+    <string name="correction_no_day">No stored data for this day.</string>
+    <string name="clear_correction">Remove correction</string>
+    <string name="corrections_title">Manual corrections</string>
+    <string name="corrections_help">Corrections are applied over source data and are not deleted by a sync.</string>
+    <string name="no_corrections">No correction for this day.</string>
+    <string name="correction_time_title">Corrected time</string>
+    <string name="correction_date_title">Correction date</string>
+    <string name="correction_list_item">%1$s: %2$s — %3$s</string>
+    <string name="correction_provenance_item">Source: %1$s</string>
+
+    <string name="hijri_label">Hijri</string>
+    <string name="gregorian_label">Gregorian</string>
+    <string name="hijri_not_available">Hijri date unavailable</string>
+    <string name="date_tomorrow">tomorrow</string>
+
+    <string name="official_source_title">Algerian official source</string>
+    <string name="official_source_unavailable">No documented public API from the Ministry of Religious Affairs and Wakfs was found. No official data is copied from an unverified source, and AlAdhan is never presented as official.</string>
+    <string name="provider_label">Prayer time provider</string>
+    <string name="country_label">Country</string>
+    <string name="country_algeria">Algeria</string>
+    <string name="city_label">City</string>
+    <string name="timezone_label">Timezone (IANA)</string>
+    <string name="timezone_invalid">Enter a valid IANA timezone, for example Africa/Algiers.</string>
+    <string name="last_sync_label">Last successful sync</string>
+    <string name="validity_label">Data status</string>
+    <string name="never">Never</string>
+    <string name="last_attempt_label">Last attempt</string>
+    <string name="data_sources_title">Data sources</string>
+    <string name="settings_saved">Setting saved.</string>
+    <string name="city_changed">City and timezone saved. Sync for the new dates.</string>
+    <string name="no_data_for_validation">No data for this day yet.</string>
+
+    <string name="language_title">Language</string>
+    <string name="language_help">Arabic is right-to-left; French and English are left-to-right. The choice persists after restart.</string>
+    <string name="colors_title">Display colours</string>
+    <string name="colors_help">Every colour is editable. Defaults are visual choices, not religious conventions.</string>
+    <string name="reset_colors">Restore default colours</string>
+    <string name="reset_colors_confirm">Restore all default colours?</string>
+    <string name="reset_done">Default colours restored.</string>
+    <string name="color_red">Red</string>
+    <string name="color_green">Green</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_hex">Hex colour</string>
+    <string name="color_apply">Apply colour</string>
+    <string name="color_invalid">Enter a colour as #RRGGBB.</string>
+    <string name="color_saved">Colour saved.</string>
+    <string name="color_preview">Preview</string>
+    <string name="color_low_contrast">Warning: this colour may have low contrast against the background.</string>
+    <string name="color_edit_for">Edit the %1$s colour</string>
+
+    <string name="manual_section_title">Manual correction</string>
+    <string name="import_title">Import file</string>
+    <string name="import_not_available">Full import is not included in this version. The model preserves explicit intervals when present and never generates them automatically.</string>
+    <string name="about_title">About data and limits</string>
+    <string name="about_sources">The app shows times calculated by AlAdhan using method 19. No documented Algerian official API is integrated. Corrections stay local. Optional and necessary times are never derived from prayer times.</string>
+    <string name="about_version">Version 1.0 — offline after the first sync</string>
+    <string name="privacy_note">No personal data is sent. Times and settings stay on the device.</string>
+
+    <string name="calendar_prev">Previous month</string>
+    <string name="calendar_next">Next month</string>
+    <string name="calendar_no_data">No stored data for this day.</string>
+    <string name="calendar_select_day">Select a day to show stored data.</string>
+    <string name="calendar_legend">Cells with data also show the Hijri day. Reading never depends on colour alone.</string>
+    <string name="calendar_source">Source</string>
+    <string name="calendar_corrected">corrected</string>
+    <string name="calendar_intervals_not_configured">Optional and necessary intervals are not configured for this day.</string>
+    <string name="calendar_intervals_configured">Explicit religious intervals: optional %1$d, necessary %2$d.</string>
+    <string name="calendar_selected_day">Day details</string>
+    <string name="calendar_today">Today</string>
+
+    <string name="settings_content_description">Open settings</string>
+    <string name="calendar_content_description">Open calendar</string>
+    <string name="refresh_content_description">Sync data</string>
+    <string name="edit_time_for">Correct the %1$s time</string>
+    <string name="previous_month_content_description">Previous month</string>
+    <string name="next_month_content_description">Next month</string>
+
+    <string name="format_source_line">%1$s · %2$s</string>
+    <string name="format_last_sync">%1$s</string>
+    <string name="format_selected_date">%1$s — %2$s</string>
+    <string name="format_sync_time">%1$s</string>
+</resources>
