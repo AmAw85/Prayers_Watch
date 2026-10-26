@@ -17,6 +17,7 @@ import com.horloge.islamique.core.HijriDate;
 import com.horloge.islamique.core.Prayer;
 import com.horloge.islamique.core.PrayerDay;
 import com.horloge.islamique.core.SourceInfo;
+import com.horloge.islamique.core.TimeEngine;
 import com.horloge.islamique.data.AlAdhanClient;
 import com.horloge.islamique.data.PrayerDatabase;
 import com.horloge.islamique.data.PrayerRepository;
@@ -248,6 +249,30 @@ public final class CalendarActivity extends BaseActivity {
                 UiKit.providerLabel(this, source),
                 getString(UiKit.sourceKindLabel(source.kind()))));
 
+        Instant sunrise = day.sunrise();
+        if (sunrise != null) {
+            LinearLayout sunRow = new LinearLayout(this);
+            sunRow.setOrientation(LinearLayout.HORIZONTAL);
+            sunRow.setGravity(Gravity.CENTER_VERTICAL);
+            sunRow.setPadding(0, UiKit.dp(this, 5), 0, UiKit.dp(this, 5));
+
+            sunRow.addView(UiKit.coloredDot(this, getColor(R.color.text_secondary)), UiKit.dotParams(this));
+            TextView sunName = new TextView(this);
+            sunName.setText(getString(R.string.sunrise));
+            sunName.setTextColor(getColor(R.color.text_secondary));
+            sunName.setTextSize(14);
+            sunName.setLayoutParams(new LinearLayout.LayoutParams(
+                    0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+            sunRow.addView(sunName);
+            TextView sunTime = new TextView(this);
+            sunTime.setText(DateTimeText.time(sunrise, day.zone(), locale));
+            sunTime.setTextColor(getColor(R.color.text_primary));
+            sunTime.setTextSize(14);
+            sunTime.setTypeface(null, android.graphics.Typeface.BOLD);
+            sunRow.addView(sunTime);
+            detailRows.addView(sunRow);
+        }
+
         for (Prayer prayer : Prayer.ALL) {
             Instant instant = day.effectiveTimes().get(prayer);
             LinearLayout row = new LinearLayout(this);
@@ -283,31 +308,37 @@ public final class CalendarActivity extends BaseActivity {
             detailRows.addView(row);
         }
 
-        if (day.optionalIntervals().isEmpty() && day.necessaryIntervals().isEmpty()) {
+        List<com.horloge.islamique.core.TimeInterval> intervals =
+                TimeEngine.prayerIntervals(day, repository.load(date.plusDays(1)));
+        if (intervals.isEmpty()) {
             detailIntervals.setText(R.string.calendar_intervals_not_configured);
         } else {
             detailIntervals.setText(getString(R.string.calendar_intervals_configured,
-                    day.optionalIntervals().size(), day.necessaryIntervals().size()));
-            for (com.horloge.islamique.core.TimeInterval interval : day.optionalIntervals()) {
-                addIntervalLine(interval, getString(R.string.prayer_optional), day.zone(), locale);
-            }
-            for (com.horloge.islamique.core.TimeInterval interval : day.necessaryIntervals()) {
-                addIntervalLine(interval, getString(R.string.prayer_necessary), day.zone(), locale);
+                    intervals.size()));
+            for (com.horloge.islamique.core.TimeInterval interval : intervals) {
+                addIntervalLine(interval, day.zone(), locale);
             }
         }
         detailIntervals.setVisibility(View.VISIBLE);
     }
 
     private void addIntervalLine(com.horloge.islamique.core.TimeInterval interval,
-                                 String fallback, ZoneId zone, Locale locale) {
+                                 ZoneId zone, Locale locale) {
         TextView line = new TextView(this);
-        String label = interval.label().isEmpty() ? fallback : interval.label();
+        String label = intervalLabel(interval);
         line.setText(label + ": " + DateTimeText.time(interval.start(), zone, locale)
                 + " – " + DateTimeText.time(interval.end(), zone, locale));
         line.setTextColor(getColor(R.color.text_secondary));
         line.setTextSize(12);
         line.setPadding(0, UiKit.dp(this, 2), 0, 0);
         detailRows.addView(line);
+    }
+
+    private String intervalLabel(com.horloge.islamique.core.TimeInterval interval) {
+        Prayer from = Prayer.fromKey(
+                interval.id().startsWith("prayer-")
+                        ? interval.id().substring("prayer-".length()) : "");
+        return from == null ? interval.id() : prayerName(from);
     }
 
     private String prayerName(Prayer prayer) {

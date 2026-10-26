@@ -23,8 +23,7 @@
     <string name="asr">Asr</string>
     <string name="maghrib">Maghrib</string>
     <string name="isha">Isha</string>
-    <string name="prayer_optional">Optional interval</string>
-    <string name="prayer_necessary">Necessary interval</string>
+    <string name="sunrise">Sunrise</string>
 
     <string name="next_prayer">Next prayer</string>
     <string name="next_prayer_at">at %1$s</string>
@@ -33,23 +32,16 @@
     <string name="no_next_prayer">No upcoming prayer</string>
     <string name="no_current_prayer">No current schedule available</string>
     <string name="now_active">Now: %1$s</string>
-    <string name="no_active_interval">No explicit religious interval is active now.</string>
-    <string name="intervals_not_configured">Optional and necessary intervals are not configured.</string>
 
     <string name="no_data_title">No local data for this day</string>
     <string name="no_data_body">Run a sync or check your connection. No unverified times are shown.</string>
     <string name="prayer_times">Prayer times</string>
     <string name="rings_title">Time rings</string>
     <string name="ring_prayer_title">1. Prayer recognition</string>
-    <string name="ring_optional_title">2. Optional time</string>
-    <string name="ring_necessary_title">3. Necessary time</string>
-    <string name="ring_prayer_desc">Sectors marking the start of the five prayers. This is not a ruling on religious validity.</string>
-    <string name="ring_optional_desc">Shown only after importing explicit, documented intervals.</string>
-    <string name="ring_necessary_desc">Shown only after importing explicit, documented intervals.</string>
-    <string name="ring_not_configured">Not configured — religious intervals are never derived automatically</string>
+    <string name="ring_prayer_desc">Fajr until sunrise, then each prayer until the next one, and Isha until the next day’s Fajr.</string>
     <string name="am_pm_lanes">Each ring has two lanes: AM dashed, PM solid.</string>
     <string name="legend_note">Information never relies on colour alone: every ring has a number, a name and a pattern.</string>
-    <string name="clock_content_description">12-hour analog clock with prayer and religious interval rings</string>
+    <string name="clock_content_description">12-hour analog clock with a prayer interval ring and sunrise</string>
 
     <string name="source">Source</string>
     <string name="source_status">Source: %1$s · %2$s</string>
@@ -156,7 +148,7 @@
     <string name="import_title">Import file</string>
     <string name="import_not_available">Full import is not included in this version. The model preserves explicit intervals when present and never generates them automatically.</string>
     <string name="about_title">About data and limits</string>
-    <string name="about_sources">The app shows times calculated by AlAdhan using method 19. No documented Algerian official API is integrated. Corrections stay local. Optional and necessary times are never derived from prayer times.</string>
+    <string name="about_sources">The app shows times calculated by AlAdhan using method 19. No documented Algerian official API is integrated. Corrections stay local. Prayer intervals are built only from the available source times.</string>
     <string name="about_version">Version 1.0 — offline after the first sync</string>
     <string name="privacy_note">No personal data is sent. Times and settings stay on the device.</string>
 
@@ -167,8 +159,8 @@
     <string name="calendar_legend">Cells with data also show the Hijri day. Reading never depends on colour alone.</string>
     <string name="calendar_source">Source</string>
     <string name="calendar_corrected">corrected</string>
-    <string name="calendar_intervals_not_configured">Optional and necessary intervals are not configured for this day.</string>
-    <string name="calendar_intervals_configured">Explicit religious intervals: optional %1$d, necessary %2$d.</string>
+    <string name="calendar_intervals_not_configured">No prayer interval is available for this day.</string>
+    <string name="calendar_intervals_configured">Prayer intervals: %1$d.</string>
     <string name="calendar_selected_day">Day details</string>
     <string name="calendar_today">Today</string>
 

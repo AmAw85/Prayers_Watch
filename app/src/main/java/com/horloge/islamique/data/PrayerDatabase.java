@@ -12,7 +12,6 @@ import com.horloge.islamique.core.Prayer;
 import com.horloge.islamique.core.PrayerDay;
 import com.horloge.islamique.core.ScheduleIssue;
 import com.horloge.islamique.core.SourceInfo;
-import com.horloge.islamique.core.TimeInterval;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +29,7 @@ import java.util.Map;
 /** SQLite persistence preserving source and corrected values in distinct columns. */
 public final class PrayerDatabase extends SQLiteOpenHelper implements PrayerStore {
     private static final String DB_NAME = "horloge_islamique.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     public PrayerDatabase(Context context) {
         super(context.getApplicationContext(), DB_NAME, null, DB_VERSION);
@@ -53,6 +52,7 @@ public final class PrayerDatabase extends SQLiteOpenHelper implements PrayerStor
                 + "source_kind TEXT NOT NULL,"
                 + "attribution TEXT NOT NULL DEFAULT '',"
                 + "fetched_at INTEGER NOT NULL,"
+                + "sunrise_epoch INTEGER,"
                 + "hijri_json TEXT,"
                 + "optional_json TEXT NOT NULL DEFAULT '[]',"
                 + "necessary_json TEXT NOT NULL DEFAULT '[]',"
@@ -74,7 +74,11 @@ public final class PrayerDatabase extends SQLiteOpenHelper implements PrayerStor
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Version 1: no migrations yet.
+        // Version 2: persisted source sunrise. Legacy optional/necessary JSON columns
+        // are kept untouched for compatibility but are no longer read or written.
+        if (oldVersion < 2) {
+            db.execSQL("ALTER TABLE prayer_days ADD COLUMN sunrise_epoch INTEGER");
+        }
     }
 
     @Override
@@ -122,10 +126,11 @@ public final class PrayerDatabase extends SQLiteOpenHelper implements PrayerStor
                     cursor.getLong(cursor.getColumnIndexOrThrow("fetched_at")));
             HijriDate hijri = parseHijri(
                     cursor.getString(cursor.getColumnIndexOrThrow("hijri_json")));
-            List<TimeInterval> optional = parseIntervals(
-                    cursor.getString(cursor.getColumnIndexOrThrow("optional_json")));
-            List<TimeInterval> necessary = parseIntervals(
-                    cursor.getString(cursor.getColumnIndexOrThrow("necessary_json")));
+            Instant sunrise = null;
+            int sunriseIndex = cursor.getColumnIndexOrThrow("sunrise_epoch");
+            if (!cursor.isNull(sunriseIndex)) {
+                sunrise = Instant.ofEpochMilli(cursor.getLong(sunriseIndex));
+            }
             List<ScheduleIssue> issues = parseIssues(
                     cursor.getString(cursor.getColumnIndexOrThrow("issues_json")));
 
@@ -158,8 +163,8 @@ public final class PrayerDatabase extends SQLiteOpenHelper implements PrayerStor
                     }
                 }
             }
-            return new PrayerDay(date, zone, locationId, source, fetchedAt, originals, corrections,
-                    optional, necessary, hijri, issues);
+            return new PrayerDay(date, zone, locationId, source, fetchedAt, sunrise,
+                    originals, corrections, issues, hijri);
         }
     }
 
@@ -183,8 +188,11 @@ public final class PrayerDatabase extends SQLiteOpenHelper implements PrayerStor
             dayValues.put("fetched_at", day.fetchedAt() == null
                     ? Instant.now().toEpochMilli() : day.fetchedAt().toEpochMilli());
             dayValues.put("hijri_json", hijriJson(day.hijri()));
-            dayValues.put("optional_json", intervalsJson(day.optionalIntervals()));
-            dayValues.put("necessary_json", intervalsJson(day.necessaryIntervals()));
+            if (day.sunrise() == null) {
+                dayValues.putNull("sunrise_epoch");
+            } else {
+                dayValues.put("sunrise_epoch", day.sunrise().toEpochMilli());
+            }
             dayValues.put("issues_json", issuesJson(day.issues()));
             int updated = db.update("prayer_days", dayValues, "date = ?",
                     new String[]{day.date().toString()});
@@ -334,46 +342,6 @@ public final class PrayerDatabase extends SQLiteOpenHelper implements PrayerStor
         } catch (JSONException ex) {
             return null;
         }
-    }
-
-    private static String intervalsJson(List<TimeInterval> intervals) {
-        JSONArray array = new JSONArray();
-        try {
-            for (TimeInterval interval : intervals) {
-                JSONObject object = new JSONObject();
-                object.put("id", interval.id());
-                object.put("label", interval.label());
-                object.put("start", interval.start().toEpochMilli());
-                object.put("end", interval.end().toEpochMilli());
-                object.put("provenance", interval.provenance());
-                array.put(object);
-            }
-        } catch (JSONException ex) {
-            return "[]";
-        }
-        return array.toString();
-    }
-
-    private static List<TimeInterval> parseIntervals(String raw) {
-        if (raw == null || raw.isEmpty()) {
-            return Collections.emptyList();
-        }
-        List<TimeInterval> result = new ArrayList<>();
-        try {
-            JSONArray array = new JSONArray(raw);
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject object = array.getJSONObject(i);
-                result.add(new TimeInterval(
-                        object.optString("id", ""),
-                        object.optString("label", ""),
-                        Instant.ofEpochMilli(object.getLong("start")),
-                        Instant.ofEpochMilli(object.getLong("end")),
-                        object.optString("provenance", "")));
-            }
-        } catch (JSONException ex) {
-            return Collections.emptyList();
-        }
-        return result;
     }
 
     private static String issuesJson(List<ScheduleIssue> issues) {

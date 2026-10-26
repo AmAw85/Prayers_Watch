@@ -23,8 +23,7 @@
     <string name="asr">العصر</string>
     <string name="maghrib">المغرب</string>
     <string name="isha">العشاء</string>
-    <string name="prayer_optional">وقت اختياري</string>
-    <string name="prayer_necessary">وقت ضروري</string>
+    <string name="sunrise">الشروق</string>
 
     <string name="next_prayer">الصلاة القادمة</string>
     <string name="next_prayer_at">في %1$s</string>
@@ -33,23 +32,16 @@
     <string name="no_next_prayer">لا تتوفر صلاة قادمة</string>
     <string name="no_current_prayer">لا يتوفر وقت حالي</string>
     <string name="now_active">الآن: %1$s</string>
-    <string name="no_active_interval">لا يوجد وقت ديني صريح مطابق الآن.</string>
-    <string name="intervals_not_configured">الأوقات الاختيارية والضرورية غير مهيأة.</string>
 
     <string name="no_data_title">لا توجد بيانات محلية لهذا اليوم</string>
     <string name="no_data_body">شغّل المزامنة أو تحقق من اتصالك. لن يعرض التطبيق مواقيت غير موثوقة.</string>
     <string name="prayer_times">مواقيت الصلاة</string>
     <string name="rings_title">حلقات الوقت</string>
     <string name="ring_prayer_title">١. تمييز الصلوات</string>
-    <string name="ring_optional_title">٢. الوقت الاختياري</string>
-    <string name="ring_necessary_title">٣. الوقت الضروري</string>
-    <string name="ring_prayer_desc">قطاعات لتحديد بداية الصلوات الخمس. ليست فتوى بصلاحية الوقت.</string>
-    <string name="ring_optional_desc">لا تُعرض إلا عند استيراد فترات صريحة وموثقة.</string>
-    <string name="ring_necessary_desc">لا تُعرض إلا عند استيراد فترات صريحة وموثقة.</string>
-    <string name="ring_not_configured">غير مهيأ — لا تُستنتج أوقات دينية تلقائيًا</string>
+    <string name="ring_prayer_desc">قطاعات الفجر حتى الشروق، ثم من كل صلاة إلى الصلاة التالية، والعشاء حتى فجر الغد.</string>
     <string name="am_pm_lanes">لكل حلقة مساران: صباحًا (متقطع) ومساءً (متصل).</string>
     <string name="legend_note">لا تعتمد المعلومات على اللون وحده: لكل حلقة رقم واسم ونمط.</string>
-    <string name="clock_content_description">ساعة تناظرية ذات 12 ساعة مع حلقات للصلوات والأوقات الدينية</string>
+    <string name="clock_content_description">ساعة تناظرية ذات 12 ساعة مع حلقة لفترات الصلوات وشروق الشمس</string>
 
     <string name="source">المصدر</string>
     <string name="source_status">المصدر: %1$s · %2$s</string>
@@ -156,7 +148,7 @@
     <string name="import_title">استيراد ملف</string>
     <string name="import_not_available">الاستيراد الكامل غير مضمّن في هذه النسخة. البنية تحفظ الفترات الصريحة إذا وُجدت، ولا تولّدها تلقائيًا.</string>
     <string name="about_title">حول البيانات والقيود</string>
-    <string name="about_sources">يعرض التطبيق مواقيت محسوبة من AlAdhan بالطريقة 19. لا توجد واجهة رسمية جزائرية موثقة مدمجة. تُحفظ التصحيحات محليًا. الأوقات الاختيارية والضرورية لا تُستنتج من مواقيت الصلاة.</string>
+    <string name="about_sources">يعرض التطبيق مواقيت محسوبة من AlAdhan بالطريقة 19. لا توجد واجهة رسمية جزائرية موثقة مدمجة. تُحفظ التصحيحات محليًا. فترات الصلوات تُبنى من مواقيت المصدر المتوفرة فقط.</string>
     <string name="about_version">الإصدار 1.0 — دون اتصال بعد أول مزامنة</string>
     <string name="privacy_note">لا يُرسل التطبيق أي بيانات شخصية. تُحفظ المواقيت والإعدادات على الجهاز.</string>
 
@@ -167,8 +159,8 @@
     <string name="calendar_legend">الخلايا ذات البيانات تعرض اليوم الهجري أيضًا. لا تعتمد القراءة على اللون وحده.</string>
     <string name="calendar_source">المصدر</string>
     <string name="calendar_corrected">مصحح</string>
-    <string name="calendar_intervals_not_configured">الأوقات الاختيارية والضرورية غير مهيأة لهذا اليوم.</string>
-    <string name="calendar_intervals_configured">الأوقات الدينية الصريحة: اختياري %1$d، ضروري %2$d.</string>
+    <string name="calendar_intervals_not_configured">لا تتوفر فترات صلوات لهذا اليوم.</string>
+    <string name="calendar_intervals_configured">فترات الصلوات: %1$d.</string>
     <string name="calendar_selected_day">تفاصيل اليوم</string>
     <string name="calendar_today">اليوم</string>
 

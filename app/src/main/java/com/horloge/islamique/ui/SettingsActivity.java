@@ -775,12 +775,8 @@ public final class SettingsActivity extends BaseActivity {
             case MAGHRIB:
                 return getString(R.string.maghrib);
             case ISHA:
-                return getString(R.string.isha);
-            case OPTIONAL:
-                return getString(R.string.prayer_optional);
-            case NECESSARY:
             default:
-                return getString(R.string.prayer_necessary);
+                return getString(R.string.isha);
         }
     }
 

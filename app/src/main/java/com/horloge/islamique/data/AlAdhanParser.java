@@ -71,6 +71,8 @@ public final class AlAdhanParser {
             JSONObject timings = data.getJSONObject("timings");
             Map<Prayer, Instant> times = new EnumMap<>(Prayer.class);
             List<ScheduleIssue> parseIssues = new ArrayList<>();
+            Instant sunrise = parseSunrise(timings.optString("Sunrise", ""),
+                    requestedDate, requestedZone, parseIssues);
             Instant previous = null;
             for (Prayer prayer : Prayer.ALL) {
                 String raw = timings.optString(apiKey(prayer), "");
@@ -107,9 +109,7 @@ public final class AlAdhanParser {
 
             HijriDate hijri = parseHijri(data.getJSONObject("date").optJSONObject("hijri"));
             List<ScheduleIssue> issues = ScheduleValidator.validateAll(
-                    requestedDate, requestedZone, times,
-                    java.util.Collections.emptyList(), java.util.Collections.emptyList(),
-                    hijri, parseIssues);
+                    requestedDate, requestedZone, times, hijri, parseIssues);
             if (times.size() != Prayer.ALL.size()) {
                 throw new DataSourceException(DataSourceException.Code.INVALID_DATA,
                         "The provider did not supply all five prayers");
@@ -121,7 +121,7 @@ public final class AlAdhanParser {
                 }
             }
             return new PrayerDay(requestedDate, requestedZone, locationId, source, fetchedAt,
-                    times, null, null, null, hijri, issues);
+                    sunrise, times, null, issues, hijri);
         } catch (JSONException ex) {
             throw new DataSourceException(DataSourceException.Code.INVALID_DATA,
                     "Malformed provider response", ex);
@@ -129,6 +129,26 @@ public final class AlAdhanParser {
             throw new DataSourceException(DataSourceException.Code.INVALID_DATA,
                     "Malformed date in provider response", ex);
         }
+    }
+
+    private static Instant parseSunrise(String raw, LocalDate date, ZoneId zone,
+                                        List<ScheduleIssue> parseIssues) {
+        if (raw.trim().isEmpty()) {
+            return null;
+        }
+        try {
+            return parseLocalTime(raw.trim(), date, zone);
+        } catch (DateTimeParseException ex) {
+            parseIssues.add(new ScheduleIssue(
+                    ScheduleIssue.Code.MISSING_TIME, "sunrise"));
+            return null;
+        }
+    }
+
+    private static Instant parseLocalTime(String raw, LocalDate date, ZoneId zone)
+            throws DateTimeParseException {
+        LocalTime parsed = LocalTime.parse(raw);
+        return parsed.atDate(date).atZone(zone).toInstant();
     }
 
     private static HijriDate parseHijri(JSONObject hijri) {

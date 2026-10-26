@@ -55,21 +55,29 @@ public final class TimeEngine {
     }
 
     public static Optional<CurrentPrayer> currentPrayer(Instant now, List<PrayerDay> days) {
-        List<Slot> slots = sortedSlots(days);
-        Slot current = null;
-        Slot next = null;
-        for (Slot slot : slots) {
-            if (slot.instant.isAfter(now)) {
-                next = slot;
-                break;
-            }
-            current = slot;
-        }
-        if (current == null) {
+        if (days == null) {
             return Optional.empty();
         }
-        Instant end = next == null ? current.instant.plus(Duration.ofDays(1)) : next.instant;
-        return Optional.of(new CurrentPrayer(current.prayer, current.day, current.instant, end));
+        Map<LocalDate, PrayerDay> byDate = new java.util.HashMap<>();
+        for (PrayerDay day : days) {
+            if (day != null) {
+                byDate.putIfAbsent(day.date(), day);
+            }
+        }
+        for (PrayerDay day : days) {
+            if (day == null) {
+                continue;
+            }
+            PrayerDay nextDay = byDate.get(day.date().plusDays(1));
+            for (TimeInterval interval : prayerIntervals(day, nextDay)) {
+                if (interval.contains(now)) {
+                    Prayer prayer = Prayer.fromKey(interval.id().substring("prayer-".length()));
+                    return Optional.of(new CurrentPrayer(
+                            prayer, day.date(), interval.start(), interval.end()));
+                }
+            }
+        }
+        return Optional.empty();
     }
 
     public static Optional<NextPrayer> nextPrayer(Instant now, List<PrayerDay> days) {
@@ -86,38 +94,38 @@ public final class TimeEngine {
     }
 
     /**
-     * Sectors used only to identify prayers on the clock. They are NOT claims about
-     * the valid religious time; that information requires explicit, sourced intervals.
+     * Prayer intervals derived strictly from the source data actually available:
+     * Fajr ends at the source sunrise; each later prayer ends at the next prayer's
+     * entry; Isha ends at the next day's Fajr when it is available. A missing bound
+     * means no interval is invented.
      */
-    public static List<TimeInterval> prayerSectors(PrayerDay day, PrayerDay nextDay) {
+    public static List<TimeInterval> prayerIntervals(PrayerDay day, PrayerDay nextDay) {
         List<TimeInterval> result = new ArrayList<>();
-        Map<Prayer, Instant> times = day.effectiveTimes();
-        for (int i = 0; i < Prayer.ALL.size(); i++) {
-            Prayer prayer = Prayer.ALL.get(i);
-            Instant start = times.get(prayer);
-            if (start == null) {
-                continue;
-            }
-            Instant end = null;
-            for (int j = i + 1; j < Prayer.ALL.size(); j++) {
-                end = times.get(Prayer.ALL.get(j));
-                if (end != null) {
-                    break;
-                }
-            }
-            if (end == null) {
-                if (nextDay != null && nextDay.effectiveTimes().get(Prayer.FAJR) != null) {
-                    end = nextDay.effectiveTimes().get(Prayer.FAJR);
-                } else {
-                    end = day.date().plusDays(1).atStartOfDay(day.zone()).toInstant();
-                }
-            }
-            if (end.isAfter(start)) {
-                result.add(new TimeInterval("prayer-" + prayer.key(), "", start, end,
-                        day.source().displayName()));
-            }
+        if (day == null) {
+            return result;
         }
+        Map<Prayer, Instant> times = day.effectiveTimes();
+        Instant fajr = times.get(Prayer.FAJR);
+        Instant sunrise = day.sunrise();
+        Instant dhuhr = times.get(Prayer.DHUHR);
+        Instant asr = times.get(Prayer.ASR);
+        Instant maghrib = times.get(Prayer.MAGHRIB);
+        Instant isha = times.get(Prayer.ISHA);
+        Instant nextFajr = nextDay == null ? null : nextDay.effectiveTimes().get(Prayer.FAJR);
+
+        addInterval(result, Prayer.FAJR, fajr, sunrise, day.source().displayName());
+        addInterval(result, Prayer.DHUHR, dhuhr, asr, day.source().displayName());
+        addInterval(result, Prayer.ASR, asr, maghrib, day.source().displayName());
+        addInterval(result, Prayer.MAGHRIB, maghrib, isha, day.source().displayName());
+        addInterval(result, Prayer.ISHA, isha, nextFajr, day.source().displayName());
         return result;
+    }
+
+    private static void addInterval(List<TimeInterval> result, Prayer prayer, Instant start,
+                                    Instant end, String provenance) {
+        if (start != null && end != null && end.isAfter(start)) {
+            result.add(new TimeInterval("prayer-" + prayer.key(), "", start, end, provenance));
+        }
     }
 
     public static List<TimeInterval> activeIntervals(Instant now, List<TimeInterval> intervals) {

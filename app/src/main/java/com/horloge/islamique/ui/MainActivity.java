@@ -382,6 +382,30 @@ public final class MainActivity extends BaseActivity {
         legendContainer.removeAllViews();
         addRingHeader(1, R.string.ring_prayer_title, R.string.ring_prayer_desc, null);
 
+        Instant sunrise = todayDay == null ? null : todayDay.sunrise();
+        if (sunrise != null) {
+            LinearLayout sunLine = new LinearLayout(this);
+            sunLine.setOrientation(LinearLayout.HORIZONTAL);
+            sunLine.setGravity(Gravity.CENTER_VERTICAL);
+            sunLine.setPadding(UiKit.dp(this, 4), UiKit.dp(this, 3),
+                    UiKit.dp(this, 4), UiKit.dp(this, 3));
+            sunLine.addView(UiKit.coloredDot(this, getColor(R.color.text_secondary)),
+                    UiKit.dotParams(this));
+            TextView sunLabel = new TextView(this);
+            sunLabel.setText(getString(R.string.sunrise));
+            sunLabel.setTextColor(getColor(R.color.text_secondary));
+            sunLabel.setTextSize(13);
+            sunLabel.setLayoutParams(new LinearLayout.LayoutParams(
+                    0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+            sunLine.addView(sunLabel);
+            TextView sunTime = new TextView(this);
+            sunTime.setText(DateTimeText.time(sunrise, repository.zone(), locale()));
+            sunTime.setTextColor(getColor(R.color.text_secondary));
+            sunTime.setTextSize(13);
+            sunLine.addView(sunTime);
+            legendContainer.addView(sunLine);
+        }
+
         for (Prayer prayer : Prayer.ALL) {
             LinearLayout line = new LinearLayout(this);
             line.setOrientation(LinearLayout.HORIZONTAL);
@@ -405,18 +429,6 @@ public final class MainActivity extends BaseActivity {
             line.addView(time);
             legendContainer.addView(line);
         }
-
-        addRingHeader(2, R.string.ring_optional_title, R.string.ring_optional_desc,
-                settings.color(com.horloge.islamique.settings.ColorSlot.OPTIONAL));
-        addIntervalsLegend(todayDay == null ? Collections.emptyList()
-                : todayDay.optionalIntervals(), R.string.prayer_optional,
-                R.string.ring_not_configured);
-
-        addRingHeader(3, R.string.ring_necessary_title, R.string.ring_necessary_desc,
-                settings.color(com.horloge.islamique.settings.ColorSlot.NECESSARY));
-        addIntervalsLegend(todayDay == null ? Collections.emptyList()
-                : todayDay.necessaryIntervals(), R.string.prayer_necessary,
-                R.string.ring_not_configured);
     }
 
     private void addRingHeader(int number, int titleRes, int descRes, Integer color) {
@@ -462,62 +474,6 @@ public final class MainActivity extends BaseActivity {
         legendContainer.addView(root);
     }
 
-    private void addIntervalsLegend(List<TimeInterval> intervals, int fallbackLabel,
-                                    int notConfiguredRes) {
-        if (intervals == null || intervals.isEmpty()) {
-            TextView empty = new TextView(this);
-            empty.setText(notConfiguredRes);
-            empty.setTextColor(getColor(R.color.text_secondary));
-            empty.setTextSize(12);
-            empty.setPadding(UiKit.dp(this, 4), UiKit.dp(this, 2),
-                    UiKit.dp(this, 4), UiKit.dp(this, 6));
-            legendContainer.addView(empty);
-            return;
-        }
-        for (TimeInterval interval : intervals) {
-            LinearLayout line = new LinearLayout(this);
-            line.setOrientation(LinearLayout.VERTICAL);
-            line.setPadding(UiKit.dp(this, 4), UiKit.dp(this, 3),
-                    UiKit.dp(this, 4), UiKit.dp(this, 3));
-            TextView title = new TextView(this);
-            title.setText(interval.label().isEmpty()
-                    ? getString(fallbackLabel) : interval.label());
-            title.setTextColor(getColor(R.color.text_primary));
-            title.setTextSize(13);
-            line.addView(title);
-            TextView range = new TextView(this);
-            range.setText(formatInterval(interval));
-            range.setTextColor(getColor(R.color.text_secondary));
-            range.setTextSize(12);
-            line.addView(range);
-            if (!interval.provenance().isEmpty()) {
-                TextView provenance = new TextView(this);
-                provenance.setText(interval.provenance());
-                provenance.setTextColor(getColor(R.color.text_secondary));
-                provenance.setTextSize(11);
-                line.addView(provenance);
-            }
-            legendContainer.addView(line);
-        }
-    }
-
-    private String formatInterval(TimeInterval interval) {
-        ZoneId zone = repository.zone();
-        Locale locale = locale();
-        String start;
-        String end;
-        LocalDate startDate = interval.start().atZone(zone).toLocalDate();
-        LocalDate endDate = interval.end().atZone(zone).toLocalDate();
-        if (startDate.equals(endDate)) {
-            start = DateTimeText.time(interval.start(), zone, locale);
-            end = DateTimeText.time(interval.end(), zone, locale);
-        } else {
-            start = DateTimeText.dateTime(interval.start(), zone, locale);
-            end = DateTimeText.dateTime(interval.end(), zone, locale);
-        }
-        return start + " – " + end;
-    }
-
     private void updateDynamic(Instant now) {
         if (repository == null) {
             return;
@@ -528,44 +484,10 @@ public final class MainActivity extends BaseActivity {
 
         Optional<TimeEngine.CurrentPrayer> current =
                 TimeEngine.currentPrayer(now, contextDays);
-        PrayerDay activeDay = null;
         if (current.isPresent()) {
-            for (PrayerDay day : contextDays) {
-                if (day.date().equals(current.get().day)) {
-                    activeDay = day;
-                    break;
-                }
-            }
             clockView.setActivePrayer(current.get().prayer, current.get().day);
-            String prayerName = prayerName(current.get().prayer);
-            List<String> activeLabels = new ArrayList<>();
-            if (activeDay != null) {
-                for (TimeInterval interval : activeDay.optionalIntervals()) {
-                    if (interval.contains(now)) {
-                        activeLabels.add(interval.label().isEmpty()
-                                ? getString(R.string.prayer_optional) : interval.label());
-                    }
-                }
-                for (TimeInterval interval : activeDay.necessaryIntervals()) {
-                    if (interval.contains(now)) {
-                        activeLabels.add(interval.label().isEmpty()
-                                ? getString(R.string.prayer_necessary) : interval.label());
-                    }
-                }
-            }
-            StringBuilder state = new StringBuilder();
-            state.append(getString(R.string.current_prayer)).append(": ").append(prayerName);
-            if (!activeLabels.isEmpty()) {
-                state.append(" · ").append(getString(R.string.now_active,
-                        join(activeLabels)));
-            } else if (activeDay != null
-                    && activeDay.optionalIntervals().isEmpty()
-                    && activeDay.necessaryIntervals().isEmpty()) {
-                state.append(" · ").append(getString(R.string.intervals_not_configured));
-            } else if (activeDay != null) {
-                state.append(" · ").append(getString(R.string.no_active_interval));
-            }
-            currentState.setText(state.toString());
+            currentState.setText(getString(R.string.current_prayer)
+                    + ": " + prayerName(current.get().prayer));
         } else {
             clockView.setActivePrayer(null, null);
             currentState.setText(R.string.no_current_prayer);
@@ -658,16 +580,5 @@ public final class MainActivity extends BaseActivity {
             default:
                 return settings.color(com.horloge.islamique.settings.ColorSlot.ISHA);
         }
-    }
-
-    private static String join(List<String> values) {
-        StringBuilder builder = new StringBuilder();
-        for (String value : values) {
-            if (builder.length() > 0) {
-                builder.append(" · ");
-            }
-            builder.append(value);
-        }
-        return builder.toString();
     }
 }

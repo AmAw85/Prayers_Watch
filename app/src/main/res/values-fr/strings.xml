@@ -23,8 +23,7 @@
     <string name="asr">Asr</string>
     <string name="maghrib">Maghrib</string>
     <string name="isha">Isha</string>
-    <string name="prayer_optional">Temps optionnel</string>
-    <string name="prayer_necessary">Temps nécessaire</string>
+    <string name="sunrise">Lever du soleil</string>
 
     <string name="next_prayer">Prochaine prière</string>
     <string name="next_prayer_at">à %1$s</string>
@@ -33,23 +32,16 @@
     <string name="no_next_prayer">Aucune prière à venir</string>
     <string name="no_current_prayer">Aucun horaire actuel disponible</string>
     <string name="now_active">Maintenant : %1$s</string>
-    <string name="no_active_interval">Aucun intervalle religieux explicite actif.</string>
-    <string name="intervals_not_configured">Les temps optionnels et nécessaires ne sont pas configurés.</string>
 
     <string name="no_data_title">Aucune donnée locale pour ce jour</string>
     <string name="no_data_body">Lancez une synchronisation ou vérifiez la connexion. Aucun horaire non fiable n’est affiché.</string>
     <string name="prayer_times">Horaires des prières</string>
     <string name="rings_title">Anneaux temporels</string>
     <string name="ring_prayer_title">1. Repères des cinq prières</string>
-    <string name="ring_optional_title">2. Temps optionnel</string>
-    <string name="ring_necessary_title">3. Temps nécessaire</string>
-    <string name="ring_prayer_desc">Secteurs indiquant le début des cinq prières. Ce n’est pas un avis sur la validité religieuse.</string>
-    <string name="ring_optional_desc">Affiché uniquement après import d’intervalles explicites et documentés.</string>
-    <string name="ring_necessary_desc">Affiché uniquement après import d’intervalles explicites et documentés.</string>
-    <string name="ring_not_configured">Non configuré — aucun temps religieux n’est déduit automatiquement</string>
+    <string name="ring_prayer_desc">Fajr jusqu’au lever du soleil, puis de chaque prière à la suivante, et Isha jusqu’au Fajr du lendemain.</string>
     <string name="am_pm_lanes">Chaque anneau possède deux voies : AM en pointillés, PM en trait plein.</string>
     <string name="legend_note">L’information ne dépend pas de la couleur : chaque anneau a un numéro, un nom et un motif.</string>
-    <string name="clock_content_description">Horloge analogique de 12 heures avec anneaux des prières et intervalles religieux</string>
+    <string name="clock_content_description">Horloge analogique de 12 heures avec anneau des intervalles de prières et lever du soleil</string>
 
     <string name="source">Source</string>
     <string name="source_status">Source : %1$s · %2$s</string>
@@ -156,7 +148,7 @@
     <string name="import_title">Importer un fichier</string>
     <string name="import_not_available">L’import complet n’est pas inclus dans cette version. Le modèle conserve les intervalles explicites s’ils existent et ne les génère jamais automatiquement.</string>
     <string name="about_title">À propos des données et limites</string>
-    <string name="about_sources">L’application affiche des horaires calculés par AlAdhan avec la méthode 19. Aucune API officielle algérienne documentée n’est intégrée. Les corrections restent locales. Les temps optionnels et nécessaires ne sont jamais déduits des horaires de prière.</string>
+    <string name="about_sources">L’application affiche des horaires calculés par AlAdhan avec la méthode 19. Aucune API officielle algérienne documentée n’est intégrée. Les corrections restent locales. Les intervalles de prière sont construits uniquement à partir des horaires sources disponibles.</string>
     <string name="about_version">Version 1.0 — fonctionne hors ligne après la première synchronisation</string>
     <string name="privacy_note">Aucune donnée personnelle n’est envoyée. Horaires et réglages restent sur l’appareil.</string>
 
@@ -167,8 +159,8 @@
     <string name="calendar_legend">Les cellules renseignées affichent aussi le jour hégirien. La lecture ne dépend pas uniquement de la couleur.</string>
     <string name="calendar_source">Source</string>
     <string name="calendar_corrected">corrigé</string>
-    <string name="calendar_intervals_not_configured">Temps optionnels et nécessaires non configurés pour ce jour.</string>
-    <string name="calendar_intervals_configured">Intervalles religieux explicites : optionnel %1$d, nécessaire %2$d.</string>
+    <string name="calendar_intervals_not_configured">Aucun intervalle de prière disponible pour ce jour.</string>
+    <string name="calendar_intervals_configured">Intervalles de prière : %1$d.</string>
     <string name="calendar_selected_day">Détails du jour</string>
     <string name="calendar_today">Aujourd’hui</string>
 

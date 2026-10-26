@@ -3,7 +3,6 @@ package com.horloge.islamique.core;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
@@ -12,7 +11,7 @@ import java.util.Map;
 
 /**
  * One local day of prayer data. Source values are kept separately from corrections.
- * Optional/necessary religious intervals are only present when supplied explicitly.
+ * The sunrise is a solar event supplied by the source; it is never modelled as a prayer.
  */
 public final class PrayerDay {
     private final LocalDate date;
@@ -20,38 +19,32 @@ public final class PrayerDay {
     private final String locationId;
     private final SourceInfo source;
     private final Instant fetchedAt;
+    private final Instant sunrise;
     private final Map<Prayer, Instant> originalTimes;
     private final Map<Prayer, Correction> corrections;
-    private final List<TimeInterval> optionalIntervals;
-    private final List<TimeInterval> necessaryIntervals;
     private final HijriDate hijri;
     private final List<ScheduleIssue> issues;
 
     public PrayerDay(LocalDate date, ZoneId zone, String locationId, SourceInfo source,
                      Instant fetchedAt,
+                     Instant sunrise,
                      Map<Prayer, Instant> originalTimes, Map<Prayer, Correction> corrections,
-                     List<TimeInterval> optionalIntervals,
-                     List<TimeInterval> necessaryIntervals,
-                     HijriDate hijri, List<ScheduleIssue> issues) {
+                     List<ScheduleIssue> issues,
+                     HijriDate hijri) {
         this.date = date;
         this.zone = zone;
         this.locationId = locationId == null ? "" : locationId;
         this.source = source;
         this.fetchedAt = fetchedAt;
+        this.sunrise = sunrise;
         this.originalTimes = Collections.unmodifiableMap(
                 new EnumMap<>(originalTimes == null ? new EnumMap<Prayer, Instant>(Prayer.class) : originalTimes));
         this.corrections = Collections.unmodifiableMap(
                 corrections == null ? new EnumMap<>(Prayer.class) : new EnumMap<>(corrections));
-        this.optionalIntervals = optionalIntervals == null
-                ? Collections.emptyList()
-                : Collections.unmodifiableList(new ArrayList<>(optionalIntervals));
-        this.necessaryIntervals = necessaryIntervals == null
-                ? Collections.emptyList()
-                : Collections.unmodifiableList(new ArrayList<>(necessaryIntervals));
         this.hijri = hijri;
         this.issues = issues == null
                 ? Collections.emptyList()
-                : Collections.unmodifiableList(new ArrayList<>(issues));
+                : Collections.unmodifiableList(new java.util.ArrayList<>(issues));
     }
 
     public LocalDate date() {
@@ -74,6 +67,11 @@ public final class PrayerDay {
         return fetchedAt;
     }
 
+    /** Sunrise as returned by the source, or null when the source omited it. */
+    public Instant sunrise() {
+        return sunrise;
+    }
+
     public Map<Prayer, Instant> originalTimes() {
         return originalTimes;
     }
@@ -93,14 +91,6 @@ public final class PrayerDay {
 
     public Map<Prayer, Correction> corrections() {
         return corrections;
-    }
-
-    public List<TimeInterval> optionalIntervals() {
-        return optionalIntervals;
-    }
-
-    public List<TimeInterval> necessaryIntervals() {
-        return necessaryIntervals;
     }
 
     public HijriDate hijri() {
@@ -146,22 +136,16 @@ public final class PrayerDay {
         Map<Prayer, Correction> updated = new EnumMap<>(Prayer.class);
         updated.putAll(corrections);
         updated.put(correction.prayer(), correction);
-        return new PrayerDay(date, zone, locationId, source, fetchedAt, originalTimes, updated,
-                optionalIntervals, necessaryIntervals, hijri, issues);
+        return new PrayerDay(date, zone, locationId, source, fetchedAt, sunrise,
+                originalTimes, updated, issues, hijri);
     }
 
     public PrayerDay withoutCorrection(Prayer prayer) {
         Map<Prayer, Correction> updated = new EnumMap<>(Prayer.class);
         updated.putAll(corrections);
         updated.remove(prayer);
-        return new PrayerDay(date, zone, locationId, source, fetchedAt, originalTimes, updated,
-                optionalIntervals, necessaryIntervals, hijri, issues);
-    }
-
-    public PrayerDay withIntervals(List<TimeInterval> optional, List<TimeInterval> necessary,
-                                   List<ScheduleIssue> newIssues) {
-        return new PrayerDay(date, zone, locationId, source, fetchedAt, originalTimes, corrections,
-                optional, necessary, hijri, newIssues);
+        return new PrayerDay(date, zone, locationId, source, fetchedAt, sunrise,
+                originalTimes, updated, issues, hijri);
     }
 
     public enum DataFreshness {

@@ -44,48 +44,24 @@ public final class ScheduleValidator {
         return issues;
     }
 
-    public static List<ScheduleIssue> validateIntervals(List<TimeInterval> intervals) {
-        List<ScheduleIssue> issues = new ArrayList<>();
-        if (intervals == null) {
-            return issues;
-        }
-        for (int i = 0; i < intervals.size(); i++) {
-            TimeInterval current = intervals.get(i);
-            if (!current.hasValidRange()) {
-                issues.add(new ScheduleIssue(ScheduleIssue.Code.INVALID_INTERVAL,
-                        current.id().isEmpty() ? Integer.toString(i) : current.id()));
-            }
-            for (int j = i + 1; j < intervals.size(); j++) {
-                if (current.overlaps(intervals.get(j))) {
-                    issues.add(new ScheduleIssue(ScheduleIssue.Code.OVERLAPPING_INTERVALS,
-                            current.id() + "/" + intervals.get(j).id()));
-                }
-            }
-        }
-        return issues;
-    }
-
     public static List<ScheduleIssue> validateAll(
             LocalDate date, ZoneId zone, Map<Prayer, Instant> times,
-            List<TimeInterval> optional, List<TimeInterval> necessary,
             HijriDate hijri, List<ScheduleIssue> inherited) {
         List<ScheduleIssue> result = new ArrayList<>();
         if (inherited != null) {
             result.addAll(inherited);
         }
         addDistinct(result, validateTimes(date, zone, times));
-        addDistinct(result, validateIntervals(optional));
-        addDistinct(result, validateIntervals(necessary));
-        if ((optional == null || optional.isEmpty())
-                && (necessary == null || necessary.isEmpty())) {
-            result.add(new ScheduleIssue(ScheduleIssue.Code.INTERVALS_NOT_CONFIGURED, ""));
-        }
         if (hijri == null) {
             result.add(new ScheduleIssue(ScheduleIssue.Code.HIJRI_MISSING, ""));
         } else if (!hijri.isPlausible()) {
-            result.add(new ScheduleIssue(ScheduleIssue.Code.HIJRI_IMPLAUSIBLE, ""));
+            result.add(new ScheduleIssue(ScheduleIssue.Code.HIJRI_IMPLAUSIBLE, hijriPlausibleDetail(hijri)));
         }
         return result;
+    }
+
+    private static String hijriPlausibleDetail(HijriDate hijri) {
+        return hijri.day() + "-" + hijri.month() + "-" + hijri.year();
     }
 
     private static void addDistinct(List<ScheduleIssue> target, List<ScheduleIssue> items) {

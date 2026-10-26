@@ -32,9 +32,8 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * 12-hour dial. Each ring contains an AM lane (dashed, inner) and a PM lane
- * (solid, outer). Ring 1 identifies prayers; rings 2 and 3 only show explicit
- * imported intervals and are never inferred from prayer times.
+ * 12-hour dial. The single prayer ring shows the prayer intervals derived from the
+ * source data (Fajr ends at sunrise; each later prayer ends at the next entry).
  */
 public final class PrayerClockView extends View {
 
@@ -47,7 +46,7 @@ public final class PrayerClockView extends View {
     private AppLanguage language = AppLanguage.ARABIC;
 
     private PrayerDay day;
-    private List<TimeInterval> prayerSectors = Collections.emptyList();
+    private List<TimeInterval> prayerIntervals = Collections.emptyList();
     private Instant now = Instant.now();
     private Prayer activePrayer;
     private LocalDate activePrayerDate;
@@ -57,8 +56,6 @@ public final class PrayerClockView extends View {
     private int colorAsr;
     private int colorMaghrib;
     private int colorIsha;
-    private int colorOptional;
-    private int colorNecessary;
 
     private int textPrimary;
     private int textSecondary;
@@ -84,11 +81,7 @@ public final class PrayerClockView extends View {
         this.language = language;
         this.locale = language.locale();
         this.day = day;
-        if (day != null) {
-            this.prayerSectors = TimeEngine.prayerSectors(day, nextDay);
-        } else {
-            this.prayerSectors = Collections.emptyList();
-        }
+        this.prayerIntervals = TimeEngine.prayerIntervals(day, nextDay);
         reloadPalette();
         reloadThemeColors();
         invalidate();
@@ -114,8 +107,6 @@ public final class PrayerClockView extends View {
         colorAsr = settings.color(ColorSlot.ASR);
         colorMaghrib = settings.color(ColorSlot.MAGHRIB);
         colorIsha = settings.color(ColorSlot.ISHA);
-        colorOptional = settings.color(ColorSlot.OPTIONAL);
-        colorNecessary = settings.color(ColorSlot.NECESSARY);
     }
 
     private void reloadThemeColors() {
@@ -161,12 +152,7 @@ public final class PrayerClockView extends View {
         drawOuterTicks(canvas, cx, cy, base);
         drawTracks(canvas, cx, cy, base);
         drawPrayerRing(canvas, cx, cy, base);
-        drawIntervalRing(canvas, cx, cy, base * 0.775f, base * 0.72f,
-                day == null ? Collections.emptyList() : day.optionalIntervals(),
-                colorOptional, true);
-        drawIntervalRing(canvas, cx, cy, base * 0.655f, base * 0.60f,
-                day == null ? Collections.emptyList() : day.necessaryIntervals(),
-                colorNecessary, false);
+        drawSunriseMarker(canvas, cx, cy, base);
         drawNumerals(canvas, cx, cy, base);
         drawHands(canvas, cx, cy, base);
         drawAmPm(canvas, cx, cy, base);
@@ -211,64 +197,51 @@ public final class PrayerClockView extends View {
     private void drawTracks(Canvas canvas, float cx, float cy, float base) {
         paint.setStyle(Paint.Style.STROKE);
         paint.setPathEffect(null);
-        float[] radii = {
-                base * 0.91f, base * 0.855f,
-                base * 0.775f, base * 0.72f,
-                base * 0.655f, base * 0.60f
-        };
-        float[] widths = {
-                base * 0.035f, base * 0.022f,
-                base * 0.035f, base * 0.022f,
-                base * 0.035f, base * 0.022f
-        };
-        for (int i = 0; i < radii.length; i++) {
-            paint.setColor(ringTrack);
-            paint.setStrokeWidth(Math.max(widths[i], UiKit.dp(getContext(), 2.5f)));
-            canvas.drawCircle(cx, cy, radii[i], paint);
-        }
+        paint.setColor(ringTrack);
+        paint.setStrokeWidth(Math.max(base * 0.035f, UiKit.dp(getContext(), 2.5f)));
+        canvas.drawCircle(cx, cy, base * 0.875f, paint);
+        paint.setStrokeWidth(Math.max(base * 0.022f, UiKit.dp(getContext(), 2.5f)));
+        canvas.drawCircle(cx, cy, base * 0.905f, paint);
     }
 
     private void drawPrayerRing(Canvas canvas, float cx, float cy, float base) {
-        if (day == null || prayerSectors.isEmpty()) {
+        if (prayerIntervals.isEmpty()) {
             return;
         }
         Paint colorPaint = segmentPaint();
         Paint haloPaint = segmentPaint();
-        for (TimeInterval sector : prayerSectors) {
-            Prayer prayer = Prayer.fromKey(sector.id().substring("prayer-".length()));
+        for (TimeInterval interval : prayerIntervals) {
+            Prayer prayer = Prayer.fromKey(interval.id().substring("prayer-".length()));
             if (prayer == null) {
                 continue;
             }
             int color = prayerColor(prayer);
             drawInterval(canvas, cx, cy, base * 0.91f, base * 0.855f,
-                    sector, color, colorPaint, haloPaint, true, false);
-            if (prayer == activePrayer && day.date().equals(activePrayerDate)) {
+                    interval, color, colorPaint, haloPaint, true, false);
+            if (prayer == activePrayer && day != null
+                    && day.date().equals(activePrayerDate)) {
                 drawActiveOverlay(canvas, cx, cy, base * 0.91f, base * 0.855f,
-                        sector, true);
+                        interval, true);
             }
         }
     }
 
-    private void drawIntervalRing(Canvas canvas, float cx, float cy,
-                                  float pmRadius, float amRadius,
-                                  List<TimeInterval> intervals, int color,
-                                  boolean dashed) {
-        if (intervals == null || intervals.isEmpty()) {
+    private void drawSunriseMarker(Canvas canvas, float cx, float cy, float base) {
+        if (day == null || day.sunrise() == null) {
             return;
         }
-        Paint colorPaint = segmentPaint();
-        Paint haloPaint = segmentPaint();
-        for (TimeInterval interval : intervals) {
-            if (!interval.hasValidRange()) {
-                continue;
-            }
-            drawInterval(canvas, cx, cy, pmRadius, amRadius,
-                    interval, color, colorPaint, haloPaint, false, dashed);
-            if (interval.contains(now)) {
-                drawActiveOverlay(canvas, cx, cy, pmRadius, amRadius,
-                        interval, false);
-            }
-        }
+        ZoneId zone = day.zone();
+        Instant dayStart = day.date().atStartOfDay(zone).toInstant();
+        long sunriseSec = Math.max(day.sunrise().getEpochSecond(), dayStart.getEpochSecond());
+        long localSec = localSecondOfDay(sunriseSec, zone);
+        float radius = base * 0.91f;
+        float angle = (float) (localSec % 43200L) / 43200f * 360f - 90f;
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(textSecondary);
+        paint.setAlpha(230);
+        canvas.drawCircle(cx + (float) Math.cos(Math.toRadians(angle)) * radius,
+                cy + (float) Math.sin(Math.toRadians(angle)) * radius,
+                UiKit.dp(getContext(), 2.8f), paint);
     }
 
     private Paint segmentPaint() {
