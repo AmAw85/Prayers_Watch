@@ -1,6 +1,6 @@
 # TASKS.md — Backlog
 
-**Dernière mise à jour :** 2026-10-26 22:34 CET  
+**Dernière mise à jour :** 2026-10-26 22:36 CET  
 **Prochaine tâche : `TEST-02`**  
 Légende : une tâche n'est `DONE` qu'après vérification de son critère d'acceptation.
 
@@ -28,18 +28,17 @@ Légende : une tâche n'est `DONE` qu'après vérification de son critère d'acc
 - **Objectif :** `AGENTS.md`, `PROJECT_STATE.md`, `TASKS.md`, `DECISIONS.md`, `DEVLOG.md`.
 - **Dépendances :** inspection du code et du build réel.
 - **Critère :** les cinq fichiers existent, sont cohérents et ne déclarent pas de test non exécuté.
-- **Vérification :** relecture croisée après création ; dépôt Git initialisé, commit initial à créer.
-
-## IN_PROGRESS
+- **Vérification :** relecture croisée après création ; push initial `9382fb6` sur `origin/main`.
 
 ### GIT-01 — Initialiser le suivi Git et publier
 - **Objectif :** créer le dépôt, un commit de référence et pousser sur GitHub sans écraser de travail.
 - **Dépendances :** autorisation utilisateur (accordée).
-- **État :** `.git` initialisé sur `main`, remote SSH configuré ; commit et push à effectuer.
 - **Critère :** `git status` fonctionne et le dépôt distant contient la branche `main`.
-- **Vérification :** `git push -u origin main`, puis `git ls-remote origin`.
+- **Vérification :** commit `9382fb6`, `git push -u origin main`, puis `git ls-remote origin` renvoie la même référence.
 
-La prochaine unité de développement reste `TEST-02`.
+## IN_PROGRESS
+
+Aucune tâche en cours. La prochaine unité de développement est `TEST-02`.
 
 ## TODO
 

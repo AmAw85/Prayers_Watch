@@ -38,3 +38,9 @@
 - **Vérification :** SSH GitHub authentifié pour `AmAw85`; dépôt distant accessible et vide. Aucun fichier ignoré (`local.properties`, builds) n'est destiné au commit.
 - **Limite :** commit et push initial encore à effectuer.
 - **Suite :** commit de l'état vérifié, push, puis contrôle `git ls-remote`.
+
+## 2026-10-26 22:36 — Publication GitHub
+- **Travail :** commit initial `9382fb6` (72 fichiers), push de `main` vers `origin`.
+- **Vérification :** `git push -u origin main` réussi ; `git ls-remote origin` renvoie `9382fb6` pour `HEAD` et `refs/heads/main`.
+- **État :** dépôt distant à jour. Aucun test supplémentaire exécuté.
+- **Suite :** `TEST-02`.

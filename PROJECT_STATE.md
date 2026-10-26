@@ -1,6 +1,6 @@
 # PROJECT_STATE.md — État du projet
 
-**Dernière mise à jour :** 2026-10-26 22:34 CET  
+**Dernière mise à jour :** 2026-10-26 22:36 CET  
 **Confiance :** élevée pour le code et le build ; moyenne pour l'état fonctionnel de l'UI, non testée à l'exécution ; aucune suite de tests exécutée.
 
 ## Objectif
@@ -13,7 +13,7 @@ Application Android « Horloge des prières » : horloge analogique 12 h, anneau
 - `assembleDebug` réussit sur l'état courant et produit `app/build/outputs/apk/debug/app-debug.apk`.
 - **Aucun test JVM avec `@Test` n'existe encore.** Seul un utilitaire de test et une fixture JSON ont été ajoutés.
 - **Aucun test d'exécution sur appareil ou émulateur n'a été effectué.**
-- **Dépôt Git initialisé** sur `main`; remote SSH `git@github.com:AmAw85/Prayers_Watch.git` configuré. Le push initial est à effectuer.
+- **Dépôt Git publié** sur `main` : `git@github.com:AmAw85/Prayers_Watch.git`, commit initial `9382fb6`. Les artefacts et `local.properties` sont ignorés.
 - Il n'existe ni wrapper Gradle, ni `README.md`.
 
 ## Terminé et vérifié
@@ -40,7 +40,7 @@ Application Android « Horloge des prières » : horloge analogique 12 h, anneau
 - Recherche d'une éventuelle API officielle algérienne réellement documentée.
 
 ## Dernière tâche réalisée
-- `DOC-01` : fichiers de suivi créés ; dépôt Git initialisé. `UI-04` (message ville/fuseau) reste compilé mais non validé à l'exécution.
+- `DOC-01` et `GIT-01` : mémoire de développement créée, dépôt initialisé et poussé sur GitHub. `UI-04` (message ville/fuseau) reste compilé mais non validé à l'exécution.
 
 ## Dernière vérification réussie
 ```sh
@@ -50,10 +50,11 @@ ANDROID_HOME=/home/ammi/Android/Sdk \
 ```
 Résultat : `BUILD SUCCESSFUL` le 2026-10-26 à 22:26 CET, APK généré.  
 La compilation des sources de test (`compileDebugUnitTestJavaWithJavac`) réussit à 22:30 CET.  
+Le push initial sur `origin/main` réussit (commit `9382fb6`) et `git ls-remote origin` renvoie la même référence.  
 Aucun test unitaire avec `@Test` ni test d'interface n'a été exécuté.
 
 ## Blocages et limitations connues
-- **Git :** dépôt initialisé sur `main` et remote configuré. Le push initial vers GitHub reste à confirmer ; `local.properties` et les builds sont ignorés.
+- **Git :** dépôt synchronisé sur `origin/main`; commit initial `9382fb6`. Les prochaines modifications doivent être commitées puis poussées, sans commit automatique non demandé.
 - **Exécution :** aucun appareil connecté, aucun émulateur ni image système installés. Le comportement réel de l'UI reste inconnu.
 - **Source :** AlAdhan est une source **calculée**, jamais officielle. Aucune API publique officielle algérienne documentée n'a été trouvée ; ne pas en inventer.
 - **Limite API :** aucune limite de débit explicite trouvée dans la documentation OpenAPI consultée. L'application reste prudente (3 jours par synchronisation, auto-sync espacée).
