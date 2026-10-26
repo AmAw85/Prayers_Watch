@@ -13,20 +13,20 @@ Les décisions ci-dessous sont validées sauf mention contraire. Toute modificat
 - **Motif :** rendre les calculs testables et éviter les ambiguïtés locales/DST.
 - **Conséquences :** les intervalles sont semi-ouverts `[début, fin)`. Les heures locales inexistantes ou ambiguës doivent être détectées, pas devinées.
 
-## D-003 — Séparer source, correction et créneaux religieux
+## D-003 — Séparer source, correction et intervalles affichés
 - **Décision :** conserver les horaires source et les corrections dans des champs distincts ; une correction référence sa valeur d'origine, sa date, sa raison et sa provenance.
 - **Motif :** ne jamais perdre la donnée d'origine et permettre l'audit.
-- **Conséquences :** une resynchronisation remplace les valeurs source mais conserve les corrections. Les créneaux optionnels/nécessaires sont des données explicites distinctes.
+- **Conséquences :** une resynchronisation remplace les valeurs source mais conserve les corrections. Les intervalles de prière affichés sont déduits des horaires réellement disponibles.
 
 ## D-004 — AlAdhan comme source calculée, jamais officielle
 - **Décision :** utiliser `https://api.aladhan.com/v1/timings/{jj-MM-aaaa}` avec `method=19` (Algérie), latitude/longitude et `timezonestring`.
 - **Motif :** source réelle, documentée et accessible ; aucune API officielle algérienne publique documentée n'a été identifiée.
 - **Conséquences :** l'UI et la documentation doivent afficher « calculé / non officiel ». Interdiction de présenter ces horaires comme une publication officielle.
 
-## D-005 — Anneaux : prière, optionnel, nécessaire
-- **Décision :** trois anneaux distincts. L'anneau de prière sert à la reconnaissance visuelle ; les anneaux optionnel et nécessaire ne sont affichés que si des créneaux explicites et sourcés existent.
-- **Motif :** ne pas inventer de temps religieux à partir des cinq horaires.
-- **Conséquences :** sans import explicite, afficher « non configuré » et un anneau neutre. Aucune déduction automatique.
+## D-005 — Anneaux et intervalles de prière
+- **Décision :** un seul anneau de prière affiche les intervalles réels : Fajr→Shurūq, chaque prière jusqu'à la suivante, et Isha jusqu'au Fajr du lendemain. Shurūq est un événement solaire distinct, pas une sixième prière.
+- **Motif :** refléter les horaires réellement disponibles sans inventer de temps religieux.
+- **Conséquences :** un intervalle n'est affiché que si sa borne de fin existe réellement ; sinon rien n'est inventé. Les temps optionnels/nécessaires sont **supprimés** du modèle, du moteur et de l'UI.
 
 ## D-006 — Cache SQLite et affichage hors ligne
 - **Décision :** persister les jours localement et afficher l'état `CURRENT`, `STALE`, `UNAVAILABLE` ou `UNVERIFIED`.
@@ -44,9 +44,9 @@ Les décisions ci-dessous sont validées sauf mention contraire. Toute modificat
 - **Conséquences :** ressources `values`, `values-fr`, `values-en` ; `supportsRtl` et `localeConfig` ; le rendu réel des trois langues reste à vérifier.
 
 ## D-009 — Couleurs personnalisables sans dépendre uniquement de la couleur
-- **Décision :** couleurs par défaut modifiables individuellement et réinitialisables : Fajr `#315C9B`, Dohr `#2D8069`, Asr `#7956A8`, Maghrib `#C87532`, Isha `#34495E`, optionnel `#70B89B`, nécessaire `#D6A23D`.
+- **Décision :** couleurs par défaut modifiables individuellement et réinitialisables : Fajr `#315C9B`, Dohr `#2D8069`, Asr `#7956A8`, Maghrib `#C87532`, Isha `#34495E`.
 - **Motif :** personnalisation visuelle et lisibilité clair/sombre.
-- **Conséquences :** légende, libellés et symboles accompagnent toujours les couleurs ; un avertissement de contraste est prévu dans l'éditeur.
+- **Conséquences :** légende, libellés et symboles accompagnent toujours les couleurs ; un avertissement de contraste est prévu dans l'éditeur. Shurūq est affiché comme événement solaire distinct, sans couleur de prière.
 
 ## D-010 — Horloge analogique 12 heures
 - **Décision :** cadran 12 h avec AM/PM explicites et deux voies par anneau : AM pointillés, PM continus.
@@ -68,7 +68,7 @@ Les décisions ci-dessous sont validées sauf mention contraire. Toute modificat
 - **Motif :** éviter les faux états « terminé ».
 - **Conséquences :** les tâches `DONE` de `TASKS.md` citent une commande ou une vérification réelle.
 
-## D-014 — Import de créneaux : architecture seulement (provisoire)
-- **Décision :** le modèle et la base prévoient les créneaux explicites, mais aucune interface d'import n'est encore livrée.
-- **Motif :** priorité au socle V1 et absence de source explicite validée.
-- **Conséquences :** l'UI affiche « non configuré » ; `FEAT-01`/`FEAT-02` restent à réaliser. Cette décision est **provisoire** et devra être révisée lors de l'import.
+## D-014 — Import de créneaux explicites (supprimé)
+- **Décision :** aucun import d'intervalles supplémentaires n'est prévu. Les temps optionnels/nécessaires et leur interface d'import sont supprimés.
+- **Motif :** simplification métier et suppression de la distinction optionnel/nécessaire.
+- **Conséquences :** la base conserve des colonnes legacy pour compatibilité, mais elles ne sont plus lues ni écrites. Pas d'interface d'import.

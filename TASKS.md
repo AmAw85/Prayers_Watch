@@ -1,6 +1,6 @@
 # TASKS.md — Backlog
 
-**Dernière mise à jour :** 2026-10-26 22:36 CET  
+**Dernière mise à jour :** 2026-10-26 22:56 CET  
 **Prochaine tâche : `TEST-02`**  
 Légende : une tâche n'est `DONE` qu'après vérification de son critère d'acceptation.
 
@@ -36,6 +36,12 @@ Légende : une tâche n'est `DONE` qu'après vérification de son critère d'acc
 - **Critère :** `git status` fonctionne et le dépôt distant contient la branche `main`.
 - **Vérification :** commit `9382fb6`, `git push -u origin main`, puis `git ls-remote origin` renvoie la même référence.
 
+### MET-01 — Supprimer les temps optionnels/nécessaires et exposer Shurūq
+- **Objectif :** appliquer la nouvelle règle métier : Fajr→Shurūq, chaque prière jusqu'à la suivante, Isha→Fajr du lendemain. Shurūq est un événement solaire distinct.
+- **Dépendances :** `TEST-01`.
+- **Critère :** code, UI, réglages et localisation cohérents ; tests JVM sur les intervalles, Shurūq, valeurs manquantes et passage de minuit ; build Android OK.
+- **Vérification :** `gradle :app:testDebugUnitTest` réussit, 7 tests passés, 0 échec ; `gradle :app:assembleDebug` réussit (2026-10-26 22:52 CET). Migration de base version 2 non destructive (`sunrise_epoch`).
+
 ## IN_PROGRESS
 
 Aucune tâche en cours. La prochaine unité de développement est `TEST-02`.
@@ -49,10 +55,10 @@ Aucune tâche en cours. La prochaine unité de développement est `TEST-02`.
 - **Vérification :** `gradle testDebugUnitTest --tests '*SettingsRepositoryTest'`.
 
 ### TEST-03 — Tester le moteur temporel
-- **Objectif :** couvrir prière courante/suivante, minuit, compte à rebours, secteurs AM/PM, fuseaux avec heure inexistante ou ambiguë.
-- **Dépendances :** `TEST-01`.
+- **Objectif :** couvrir prière courante/suivante, minuit, compte à rebours, intervalles de prière, Shurūq, fuseaux avec heure inexistante ou ambiguë.
+- **Dépendances :** `TEST-01`, `MET-01`.
 - **Critère :** cas limites testés, dont passage de minuit et intervalles semi-ouverts.
-- **Vérification :** `gradle testDebugUnitTest --tests '*TimeEngineTest'`.
+- **Vérification :** `gradle testDebugUnitTest --tests '*TimeEngineTest'`. Partie déjà couverte par `TimeEnginePrayerIntervalsTest`.
 
 ### TEST-04 — Tester validation et parseur
 - **Objectif :** couvrir horaires manquants, doublons, ordre invalide, chevauchement, fusion, parseur de la fixture, mauvaise date, mauvais fuseau et JSON invalide.
@@ -84,17 +90,17 @@ Aucune tâche en cours. La prochaine unité de développement est `TEST-02`.
 - **Critère :** aucune affirmation non vérifiée ; commandes réellement exécutables.
 - **Vérification :** relecture et exécution au moins du build documenté.
 
-### FEAT-01 — Définir l'import de créneaux explicites
-- **Objectif :** format d'import documenté (source, fuseau, début/fin, provenance) pour les temps optionnels/nécessaires.
+### FEAT-01 — Import de créneaux (supprimé)
+- **Objectif :** aucun import de créneaux optionnels/nécessaires n'est prévu.
 - **Dépendances :** aucune.
-- **Critère :** parseur pur, validation des chevauchements et tests ; aucune inférence depuis les cinq prières.
-- **Vérification :** tests JVM dédiés.
+- **Critère :** la distinction a été supprimée ; aucune nouvelle dépendance.
+- **Vérification :** `MET-01` avec build et tests verts, 2026-10-26 22:52 CET.
 
-### FEAT-02 — Ajouter l'interface d'import
-- **Objectif :** importer, prévisualiser et confirmer les créneaux ; persister et afficher leur provenance.
-- **Dépendances :** `FEAT-01`, `TEST-06`.
-- **Critère :** import explicite seulement, erreur claire si non configuré, corrections et resync préservés.
-- **Vérification :** tests JVM + smoke test UI.
+### FEAT-02 — Interface d'import (supprimée)
+- **Objectif :** aucune interface d'import de créneaux.
+- **Dépendances :** `FEAT-01`.
+- **Critère :** l'UI ne propose plus ces créneaux.
+- **Vérification :** `MET-01` avec build et tests verts, 2026-10-26 22:52 CET.
 
 ### QA-02 — Vérifier l'interface réelle
 - **Objectif :** vérifier accueil, réglages, calendrier, RTL/LTR, thèmes, insets système et lisibilité des anneaux.

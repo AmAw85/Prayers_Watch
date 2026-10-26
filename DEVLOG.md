@@ -1,5 +1,12 @@
 # DEVLOG.md — Journal technique
 
+## 2026-10-26 22:52 — Simplification métier et Shurūq
+- **Travail :** suppression des temps optionnels/nécessaires du modèle, du moteur, de l'UI, des réglages et des chaînes ; ajout de Shurūq (Fajr→Shurūq, chaque prière jusqu'à la suivante, Isha→Fajr du lendemain) ; mise à jour accueil, calendrier, horloge et couleurs.
+- **Fichiers :** `core/PrayerDay.java`, `core/TimeEngine.java`, `core/ScheduleValidator.java`, `data/AlAdhanParser.java`, `data/PrayerDatabase.java`, `data/PrayerMerge.java`, `settings/ColorSlot.java`, `ui/MainActivity.java`, `ui/CalendarActivity.java`, `ui/PrayerClockView.java`, `ui/SettingsActivity.java`, `res/values*/strings.xml`.
+- **Vérification :** `testDebugUnitTest` réussi (7 tests, 0 échec) ; `assembleDebug` réussi à 22:52 CET. Migration de base version 2 avec colonne `sunrise_epoch` non destructive.
+- **Limite :** comportement réel de l'UI non testé sur appareil/émulateur.
+- **Suite :** validation sur appareil/émulateur, puis commit explicite si demandé.
+
 ## 2026-10-26 — Socle V1
 - **Travail :** création du projet Android, modèles, moteur temporel, parseur AlAdhan, SQLite, synchronisation, préférences, localisation, horloge à trois anneaux, réglages et calendrier.
 - **Fichiers principaux :** `app/src/main/java/com/horloge/islamique/**`, `app/src/main/res/**`, `app/build.gradle`.
